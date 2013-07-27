@@ -51,13 +51,57 @@ class Statement < ActiveRecord::Base
         fragment4: second_tweet[:text],
         picture_url: user.profile_image_url,
         screen_name: user.screen_name,
-        first_tweet: Tweet.find(first_tweet[:id]).text,
-        second_tweet:Tweet.find(second_tweet[:id]).text
+        first_tweet: first_tweet[:id],
+        second_tweet: second_tweet[:id]
     )
   end
 
   def to_s
     "#{fragment1} #{fragment2} #{fragment3} #{fragment4}"
+  end
+
+  def as_json(*args)
+    tweet1 = Tweet.find(first_tweet)
+    tweet2 = Tweet.find(first_tweet)
+
+     {
+        :id => id,
+        :date => created_at,
+        :tweets =>
+            [
+                {
+                    :url => "https://twitter.com/#{screen_name}/status/#{tweet1.tweet_id_str}",
+                    :text => tweet1.text,
+                    :location =>
+                        {
+                            :lng => tweet1.longitude,
+                            :lat => tweet1.latitude
+                        }
+                },
+                {
+                    :url => "https://twitter.com/#{screen_name}/status/#{tweet2.tweet_id_str}",
+                    :text => tweet2.text,
+                    :location =>
+                        {
+                            :lng => tweet2.longitude,
+                            :lat => tweet2.latitude,
+                        }
+                }
+            ],
+        :fragments =>
+            [
+               fragment1,
+                fragment2,
+                fragment3,
+                fragment4
+            ],
+        :user =>
+            {
+                :screen_name => screen_name,
+                :name => TwitterUser.find_by_screen_name(screen_name).name,
+                :image => picture_url,
+            }
+    }
   end
 end
 

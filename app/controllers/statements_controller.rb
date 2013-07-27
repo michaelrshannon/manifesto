@@ -6,7 +6,6 @@ class StatementsController < ApplicationController
     @statement = Statement.find(id)
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @statement }
     end
   end

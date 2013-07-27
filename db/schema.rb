@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130727135351) do
+ActiveRecord::Schema.define(:version => 20130727171029) do
 
   create_table "statements", :force => true do |t|
     t.string   "fragment1"
     t.string   "fragment2"
     t.string   "fragment3"
     t.string   "fragment4"
-    t.string   "first_tweet"
-    t.string   "second_tweet"
     t.string   "screen_name"
     t.string   "picture_url"
     t.integer  "twitter_user_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "first_tweet"
+    t.integer  "second_tweet"
   end
 
   create_table "tweets", :force => true do |t|
