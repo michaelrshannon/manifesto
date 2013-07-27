@@ -1,8 +1,10 @@
 //= require TweenMax.min
-//= require mustache
+//= require ICanHaz.min
 
 $(function () {
 	function animate() {
+		$('.wrapper').html(ich['red']());
+
 		TweenMax.to('.mashifesto', 0, {top: '0px', left: '0px'});
 		TweenMax.from('#stmt-0', 1, {left: '-2000px'});
 		TweenMax.from('#block-0', 1, {left: '-2000px', delay: 0.25});
