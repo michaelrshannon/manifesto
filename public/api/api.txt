@@ -1,0 +1,15 @@
+
+
+
+	statement/get/:id
+	statement/get/all
+	statement/get/recent/5
+	
+	statements/get/all
+	statements/get/recent/5
+	
+	
+	statement/delete/:id
+	
+	
+	
