@@ -27,7 +27,7 @@
 		
 	function DataModel(app)
 	{
-		
+		this.load(this.server + 'statements/all.json', onLoad)
 	}
 	
 	DataModel.prototype =
