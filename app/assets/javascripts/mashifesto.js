@@ -3,7 +3,7 @@
 
 $(function () {
 	function animate() {
-		$('.wrapper').html(ich['red']());
+		$('.wrapper').html(ich['red']({part1:'hello'}));
 
 		TweenMax.to('.mashifesto', 0, {top: '0px', left: '0px'});
 		TweenMax.from('#stmt-0', 1, {left: '-2000px'});
