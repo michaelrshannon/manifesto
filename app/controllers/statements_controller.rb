@@ -1,6 +1,13 @@
 class StatementsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
+  def index
+    @statements = Statement.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def show
     session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first
 
