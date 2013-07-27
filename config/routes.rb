@@ -1,8 +1,7 @@
 Manifesto::Application.routes.draw do
 
   get 'ping' => 'home#ping'
-
-  get 'show' => 'twitter_users#show', :as => :twitter_user
+  get 'show/:id' => 'statements#show', :as => :statement
   root :to => 'home#index'
 
 end

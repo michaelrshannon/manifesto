@@ -9,6 +9,8 @@ class TwitterUser < ActiveRecord::Base
   # Relationships
   ###-------------------------------------------------------------------------------
   has_many :tweets
+  has_many :statements
+
   ###-------------------------------------------------------------------------------
   # Validations
   ###-------------------------------------------------------------------------------
@@ -28,5 +30,9 @@ class TwitterUser < ActiveRecord::Base
         :user_id => u.id,
         :utc_offset => u.utc_offset
     )
+  end
+
+  def create_manifesto
+
   end
 end
