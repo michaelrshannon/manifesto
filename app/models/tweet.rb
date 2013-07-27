@@ -37,17 +37,17 @@ class Tweet < ActiveRecord::Base
   )
 
 #  after_validation :reverse_geocode#, :if => lambda{ |obj| obj.address_changed? }
-  ###-------------------------------------------------------------------------------
-  # Relationships
-  ###-------------------------------------------------------------------------------
+###-------------------------------------------------------------------------------
+# Relationships
+###-------------------------------------------------------------------------------
   belongs_to :twitter_user
-  ###-------------------------------------------------------------------------------
-  # Validations
-  ###-------------------------------------------------------------------------------
+###-------------------------------------------------------------------------------
+# Validations
+###-------------------------------------------------------------------------------
   validates :tweet_id, :uniqueness => true
-  ###-------------------------------------------------------------------------------
-  # Public Methods
-  ###-------------------------------------------------------------------------------
+###-------------------------------------------------------------------------------
+# Public Methods
+###-------------------------------------------------------------------------------
 
   def self.store_tweet(t)
     unless Tweet.find_by_tweet_id(t.id)
@@ -106,13 +106,17 @@ class Tweet < ActiveRecord::Base
 
   # Stores the last time an update was attempted in ENV['LAST_UPDATE'], and will pull in
   # new tweets if 5 minutes has passed since last update
-  def self.update_tweets
-    if !ENV['LAST_UPDATE'] || (Time.now > Time.parse(ENV['LAST_UPDATE']) + 5.minutes)
-      @@client.user_timeline(ENV['TWITTER_USER']).each do |tweet|
-        Tweet.store_tweet(tweet)
+  def self.update_tweets(username)
+    unless TwitterUser.find_by_screen_name(username)
+      (1..3).each do |page|
+        tweets = @@client.user_timeline(username, count: 200, page: page)
+        break unless tweets.any?
+        tweets.each do |tweet|
+          Tweet.store_tweet(tweet) unless tweet.retweeted_status
+        end
       end
-      ENV['LAST_UPDATE'] = Time.now.to_s
     end
+    #ENV['LAST_UPDATE'] = Time.now.to_s
   end
 
   def self.find_all_with_coordinates(extra_query='')
