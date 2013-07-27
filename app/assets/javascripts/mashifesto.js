@@ -2,6 +2,13 @@
 //= require ICanHaz.min
 
 $(function () {
+	function setTransform(el, value) {
+		el.css('-o-transform', value)
+			.css('-webkit-transform', value)
+			.css('-moz-transform', value)
+			.css('transform', value);
+	}
+
 	function animate() {
 		$('.wrapper').html(ich['red']({part1:'hello'}));
 
@@ -21,6 +28,18 @@ $(function () {
 
 		TweenMax.to('.mashifesto', 2, {top: '2546px', left: '1721px', delay: 8.5});
 	}
+
+	function setScale() {
+		// Set up the scaling
+		var totalWidth = 830;
+		var scale = $(window).height() / totalWidth;
+		var wrapper = $('.wrapper');
+		setTransform(wrapper, 'scale('+ scale +')');
+		wrapper.css('margin-top', - (totalWidth / 2) * scale);
+	}
+
+	setScale();
+	$(window).resize(setScale);
 
 	animate();
 	setInterval(animate, 10000);

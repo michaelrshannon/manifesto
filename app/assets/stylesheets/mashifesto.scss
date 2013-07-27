@@ -48,6 +48,7 @@ $pad: $gutterWidth;
 }
 
 .wrapper {
+	// Scaling factor should be overridden by JS.
 	$scale: 0.7;
 	@include transform-origin(50% 0%);
 	@include transform(scale($scale));
