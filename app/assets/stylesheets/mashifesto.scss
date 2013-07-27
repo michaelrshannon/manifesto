@@ -22,6 +22,13 @@ body {
 	transform-origin: $value;	
 }
 
+@mixin filter ($value) {
+	-webkit-filter: $value;
+	-moz-filter: $value;
+	-o-filter: $value;
+	filter: $value;	
+}
+
 $columnWidth: 50px;
 $gutterWidth: 30px;
 $baseHeight: 35px;
@@ -73,7 +80,7 @@ $pad: $gutterWidth;
 		font-size: $fontSize;
 		line-height: $lineHeight;
 		margin-left: auto;
-   		margin-right: auto;
+		margin-right: auto;
 		
 		@include columns(12);
 		@include columns-height(12);
@@ -176,6 +183,162 @@ $pad: $gutterWidth;
 		#handle {
 			@extend .generated-text;
 			font-size: 0.75 * $fontSize;
+		}
+	}
+
+	&.michael {
+		$black: #000;
+		$red: #d2232a;
+		$blue: #20397c;
+		$baseAngle: 35deg;
+		$fontSize: 2 * $baseHeight;
+		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
+		$blueOpacity: 0.8;
+		$avatarOpacity: 0.7;
+
+		position: relative;
+		font-size: $fontSize;
+		line-height: $lineHeight;
+		margin-left: auto;
+		margin-right: auto;
+		
+		@include columns(12);
+		@include columns-height(12);
+		
+		@include transform-origin(50% 50%);
+		@include transform(rotate(-$baseAngle));
+
+		.stmt {
+			text-transform: uppercase;
+		}
+
+		.col-1 {
+			@include columns(6);
+			float: left;
+		}
+
+		.col-2 {
+			@include columns(6);
+			float: right;
+		}
+
+		.red-block {
+			background-color: $red;
+			opacity: $redOpacity;
+		}
+
+		.blue-block {
+			background-color: $blue;
+			opacity: $blueOpacity;
+		}
+
+		.generated-text {
+			font-family: 'molotregular';
+			font-size: 1.5 * $fontSize;
+			line-height: $lineHeight;
+		}
+
+		.stmt, .block, #handle, #mashifesto-handle {
+			position: relative;
+		}
+
+		#stmt-0 {
+			@include columns(6);
+			line-height: $lineHeight;
+			font-family: 'propagandaregular';
+			color: $black;
+			margin-bottom: $pad / 2;
+		}
+
+		#block-0 {
+			@extend .blue-block;
+			height: $fontSize;
+			@include columns(9);
+			margin-bottom: $pad;
+		}
+
+		#stmt-1 {
+			@include transform(rotate(90deg));
+			@include transform-origin(top left);
+			@extend .generated-text;
+			opacity: $blueOpacity;
+			color: $blue;
+			position: relative;
+			@include columns-height(6);
+			left: calc-column(6) - $pad / 4; // A little extra padding
+			width: 6em;
+		}
+
+		#block-1 {
+			@include columns(3);
+			@include columns-height(3);
+			margin-bottom: $pad / 2;
+			opacity: $avatarOpacity;
+
+			img {
+				border-radius: calc-column(3) / 2;
+				@include filter(grayscale(1));
+			}
+		}
+
+		#block-2 {
+			background-image: url(/assets/redtriangle.svg);
+			background-position: 0% 100%;
+			background-repeat: no-repeat;
+			background-size: auto auto;
+			opacity: $redOpacity;
+			@include columns(8);
+			@include columns-height(6);
+			position: absolute;
+			@include push(3);
+			top: - $pad;
+		}
+
+		#circle {
+			background-image: url(/assets/circlemachine.svg);
+			background-position: 30% 90%;
+			background-repeat: no-repeat;
+			background-size: calc-column(2) calc-column(2);
+			@include columns(8);
+			@include columns-height(6);
+			position: absolute;
+			@include push(3);
+			top: - $pad;
+		}
+
+		#block-3 {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(6);
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-2 {
+			font-family: 'propagandaregular';
+			margin-bottom: $pad;
+		}
+
+		#stmt-3 {
+			@extend .generated-text;
+			margin-bottom: 3 * $pad;
+			opacity: $redOpacity;
+			color: $red;
+		}
+
+		#handle {
+			@extend .generated-text;
+			opacity: $redOpacity;
+			color: $red;
+			font-size: 0.75 * $fontSize;
+			margin-bottom: $pad / 2;
+		}
+
+		#mashifesto-handle {
+			@extend .generated-text;
+			@include push(2);
+			color: $black;
+			font-size: 0.5 * $fontSize;
 		}
 
 	}

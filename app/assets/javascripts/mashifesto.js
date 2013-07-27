@@ -28,7 +28,7 @@ $(function () {
 			TweenMax.from('#handle', 1, {left: '2000px', delay: 4.75});
 
 			TweenMax.to('.mashifesto', 2, {top: '2546px', left: '1721px', delay: 8.5});
-		} else if(templateName === 'blue') {
+		} else if(templateName === 'michael') {
 
 		}
 	}
@@ -45,7 +45,7 @@ $(function () {
 	setScale();
 	$(window).resize(setScale);
 
-	var template = 'red';
+	var template = 'michael';
 	animate(template);
-	setInterval(function() { animate(template); }, 10000);
+	//setInterval(function() { animate(template); }, 10000);
 });
