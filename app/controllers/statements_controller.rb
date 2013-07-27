@@ -2,8 +2,14 @@ class StatementsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def show
-    id = params[:id] ? params[:id] : Statement.last.id
-    @statement = Statement.find(id)
+
+    begin
+      session[:NEXT_ID] = session[:NEXT_ID] + 1
+      @statement = Statement.find(session[:NEXT_ID])
+    rescue ActiveRecord::RecordNotFound
+      @statement = Statement.last
+      session[:NEXT_ID] = @statement.id
+    end
 
     respond_to do |format|
       format.json { render json: @statement }

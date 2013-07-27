@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def index
     #Tweet.update_tweets('3_Beards')
 
-    @tweets = Tweet.all
+    session[:LAST_ID] = nil
 
     respond_to do |format|
       format.html # show.html.erb
