@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130528214115) do
 
   create_table "tweets", :force => true do |t|
     t.string   "tweet_id_str"
-    t.string   "text"
+    t.text     "text"
     t.string   "source"
     t.boolean  "truncated"
     t.datetime "tweet_created_at"

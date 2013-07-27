@@ -1,5 +1,5 @@
 <ul>
-<% @tweets.each do |tweet| %>
-<li><%= tweet.text %></li>
-<% end %>
+  <% @tweets.each do |tweet| %>
+    <li><%= tweet.text %> || <%= tweet.retweeted %></li>
+  <% end %>
 </ul>

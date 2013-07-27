@@ -1,9 +1,8 @@
 class HomeController < ApplicationController
   def index
-    Tweet.update_tweets
+    #Tweet.update_tweets('3_Beards')
 
-      @tweets = Tweet.all
-
+    @tweets = Tweet.all
 
     respond_to do |format|
       format.html # show.html.erb

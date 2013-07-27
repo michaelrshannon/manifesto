@@ -13,12 +13,16 @@ class TwitterUsersController < ApplicationController
   # GET /twitter_users/1
   # GET /twitter_users/1.json
   def show
-    @twitter_user = TwitterUser.find(params[:id])
+    #Tweet.update_tweets('3_Beards')
+
+    @tweet = TwitterUser.find_by_screen_name('3_Beards').tweets.first
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @twitter_user }
+      format.js
+      format.json { render json: @tweet }
     end
+
   end
 
   # GET /twitter_users/new
