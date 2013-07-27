@@ -2,7 +2,7 @@ class StatementsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def show
-
+    session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first
     begin
       session[:NEXT_ID] = session[:NEXT_ID] + 1
       @statement = Statement.find(session[:NEXT_ID])
