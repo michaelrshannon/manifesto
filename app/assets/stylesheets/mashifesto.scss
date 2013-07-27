@@ -4,6 +4,8 @@ body {
 	background: url(/assets/background-2.jpg) no-repeat center center fixed;
 	-webkit-font-smoothing: antialiased;
 	background-size: cover;
+	height: 100%;
+	overflow: hidden;
 }
 
 @mixin transform ($value) {
@@ -66,6 +68,7 @@ $pad: $gutterWidth;
 		$lineHeight: 0.8em;
 		$redOpacity: 0.8;
 
+		position: relative;
 		font-size: $fontSize;
 		line-height: $lineHeight;
 		margin-left: auto;
@@ -112,8 +115,11 @@ $pad: $gutterWidth;
 			opacity: $redOpacity;
 		}
 
-		#stmt-0 {
+		.stmt, .block, #handle {
 			position: relative;
+		}
+
+		#stmt-0 {
 			@include columns(6);
 			line-height: $lineHeight;
 			font-family: 'propagandaregular';
