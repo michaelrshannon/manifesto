@@ -1,0 +1,10 @@
+/*
+ * *********** Day Objects ****************
+ * */
+function routeReWrite(day) {
+  b = [];
+  jQuery.each(invRoute, function() { b.push([this[1], this[0]]) });
+  var bstring = '';
+  jQuery.each(b, function() { bstring = bstring + '[' + this[1] + ', ' + this[0] + '], ' });
+  console.log(bstring);
+}
