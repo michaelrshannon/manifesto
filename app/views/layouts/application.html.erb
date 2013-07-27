@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manifesto</title>
+  <%= stylesheet_link_tag    'application', :media => 'all' %>
+  <!--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body data-newvisit='<%= @new_visit %>' class='snap'>
+
+<!--[if IE 9 ]>
+<div id="old-browser">Unfortunately, the browser you are using is out of date, and does not support the modern web. This web app will not function correctly. <a href="http://bit.ly/17li2D3" target="_blank">More information »</a></div>
+<![endif]-->
+
+<div id='yield' class="container-fluid hidden-phone">
+  <%= yield %>
+</div>
+
+<div id="too-narrow" class="visible-phone">
+  <div>
+    <h2>Unfortunately, this application is currently not designed for screens smaller than 768px wide.</h2>
+  </div>
+</div>
+
+</body>
+</html>
