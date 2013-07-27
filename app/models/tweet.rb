@@ -19,6 +19,8 @@ class Tweet < ActiveRecord::Base
 
   default_scope order('tweet_created_at DESC')
 
+  SEARCH_REGEX = /(((when we)|(it's not)|(i'm)|(i was)|(that it)|(if we)|(you can)|(when we)|(for the)|(love the)|(until you)|(i just)|(i spent)|(that will)|(i also)|(all our)|(that some)|(if we))[\s][A-z @#]*[A-z]+)/i
+  SEARCH_REGEX_STRING = SEARCH_REGEX.source
 =begin
   reverse_geocoded_by :latitude, :longitude do |obj, results|
     if geo = results.first
