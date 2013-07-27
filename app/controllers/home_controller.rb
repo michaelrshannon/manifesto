@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   def index
     #Tweet.update_tweets('3_Beards')
 
+    session[:NEXT_ID] = nil
     @tweets = Tweet.all
-
     respond_to do |format|
       format.html # show.html.erb
       format.js
