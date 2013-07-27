@@ -18,3 +18,4 @@
 
 heroku.yml
 database.yml
+Vagrantfile
