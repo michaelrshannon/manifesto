@@ -1,8 +1,7 @@
 @import "fonts";
-@import "grid";
 
 body {
-	background: url(/assets/background-1.jpg) no-repeat center center fixed;
+	background: url(/assets/background-2.jpg) no-repeat center center fixed;
 	-webkit-font-smoothing: antialiased;
 	background-size: cover;
 }
@@ -65,6 +64,7 @@ $pad: $gutterWidth;
 		$baseAngle: 35deg;
 		$fontSize: 2 * $baseHeight;
 		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
 
 		font-size: $fontSize;
 		line-height: $lineHeight;
@@ -92,15 +92,16 @@ $pad: $gutterWidth;
 		}
 
 		.stars {
-			background: url(/assets/star-line-up.png);
+			background: url(/assets/stars.svg);
 			background-size: cover;
 			@include columns(3);
 			height: 50px;
+			opacity: $redOpacity;
 		}
 
 		.red-block {
 			background-color: $red;
-			opacity: 0.8;
+			opacity: $redOpacity;
 		}
 
 		.generated-text {
@@ -108,7 +109,7 @@ $pad: $gutterWidth;
 			color: $red;
 			font-size: 1.5 * $fontSize;
 			line-height: $lineHeight;
-			opacity: 0.8;
+			opacity: $redOpacity;
 		}
 
 		#stmt-0 {
