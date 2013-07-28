@@ -172,7 +172,7 @@
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 5.5});
 				TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 5.75});
 
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
 			}
 		}
 		
@@ -201,7 +201,7 @@
 				TweenMax.from('#handle', 1, {top: '2000px', delay: 4.75});
 				TweenMax.from('#mashifesto-handle', 1, {top: '2000px', delay: 5});
 
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
 			}
 		}
 		
