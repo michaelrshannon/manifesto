@@ -548,7 +548,7 @@ $pad: $gutterWidth;
 			left: 115px;
 		}
 
-		#block-1 {
+		#avatar {
 			@include columns(3);
 			@include columns-height(3);
 			margin-bottom: $pad / 2;
