@@ -1,7 +1,7 @@
 require 'resque/server'
 Manifesto::Application.routes.draw do
   ### Resque server interface
-  unless w(development staging).include?(Rails.env)
+  unless %w(development staging).include?(Rails.env)
     resque_constraint = lambda do |request|
       user = request.env['warden'].user
       request.env['warden'].authenticate? and user.is_a?(AdminUser) and user.email == 'admin@pixelcab.in'
