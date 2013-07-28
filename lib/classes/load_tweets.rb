@@ -6,8 +6,11 @@ class LoadTweets
   @queue = :tweets
 
   def self.perform(screen_name)
-    Tweet.update_tweets(screen_name)
     user = TwitterUser.find_by_screen_name(screen_name)
-    Statement.self.store_statement(user)
+    if user
+      Tweet.update_tweets(screen_name)
+      user = TwitterUser.find_by_screen_name(screen_name)
+      Statement.store_statement(user)
+    end
   end
 end
