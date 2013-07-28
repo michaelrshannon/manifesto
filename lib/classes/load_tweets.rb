@@ -1,4 +1,5 @@
-require "#{Rails.root}/lib/classes/heroku_resque_auto_scale.rb"
+#require "#{Rails.root}/lib/classes/heroku_resque_auto_scale.rb"
+require "../../lib/classes/heroku_resque_auto_scale.rb"
 
 class LoadTweets
   extend HerokuResqueAutoScale if %w(staging uat production).include?(Rails.env)
