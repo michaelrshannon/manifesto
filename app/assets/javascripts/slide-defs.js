@@ -205,6 +205,6 @@
 			}
 		}
 		
-		Slide.addDefinition('BryceSlide', 'bryce', props);
+		Slide.addDefinition('EmptySlide', 'empty', props);
 
 
