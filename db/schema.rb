@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728115520) do
+ActiveRecord::Schema.define(:version => 20130728121829) do
 
   create_table "mentions", :force => true do |t|
-    t.integer  "mention_id"
     t.string   "screen_name"
     t.datetime "mention_created_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "mention_id",         :limit => 8
   end
 
   create_table "statements", :force => true do |t|
