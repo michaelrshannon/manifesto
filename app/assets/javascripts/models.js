@@ -15,7 +15,7 @@
 			app				:null,
 		
 			/** @type {String}	server string */
-      server		:'http://staging.mashifesto.org',
+      server		:'http://staging.mashifesto.org/',
 			//server		:'http://mashifesto-staging.herokuapp.com/',
 			//server			:'api/',
 			
