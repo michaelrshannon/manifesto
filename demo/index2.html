@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+    <title>Mashifesto</title>
+	
+	<!-- styles -->
+	<link rel="stylesheet" href="assets/stylesheets/main.css" media="all" />
+	<link rel="stylesheet" href="assets/stylesheets/mashifesto.css" media="all" />
+	<link rel="stylesheet" href="assets/fonts/stylesheet.css" media="all" />
+	
+	<!-- vendor -->
+	<script src="vendor/underscore.js"></script>
+	<script src="vendor/backbone.js"></script>
+	<script src="vendor/zepto.js"></script>
+	<script src="vendor/tweenmax/TweenMax.min.js"></script>
+	<script src="vendor/backbone.js"></script>
+	
+	<!-- app -->
+	<script src="../app/assets/javascripts/models.js"></script>
+	<script src="../app/assets/javascripts/slides.js"></script>
+	<script src="../app/assets/javascripts/slide-defs.js"></script>
+	<script src="../app/assets/javascripts/app.js"></script>
+	
+</head>
+
+<body>
+
+	<div id="content">
+		
+		<div id="wrapper">
+			
+		</div>
+		
+	</div>
+
+	<!-- templates -->
+	<script id="red" type="text/html">
+		<div class="mashifesto red">
+			<div id="stmt-0" class="stmt">
+				{{fragment_0}}
+			</div>
+			<div id="block-0" class="block"></div>
+			<div class="col-1">
+				<div id="stmt-1" class="stmt">
+					{{fragment_1}}
+				</div>
+			</div>
+			<div class="col-2">
+				<div id="block-1" class="block"></div>
+				<div id="block-2" class="block"></div>
+				<div id="block-3" class="block"></div>
+				<div id="stmt-2" class="stmt">
+					{{fragment_2}}
+				</div>
+				<div id="stmt-3" class="stmt">
+					{{fragment_3}}
+				</div>
+				<div id="handle">
+					@{{name}}
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="michael" type="text/html">
+		<div class="mashifesto michael">
+			<div id="stmt-0" class="stmt">
+				{{fragment_0}}
+			</div>
+			<div id="block-0" class="block"></div>
+			<div class="col-1">
+				<div id="stmt-1" class="stmt">
+					{{fragment_1}}
+				</div>
+			</div>
+			<div class="col-2">
+				<div id="avatar" class="block">
+					<img src="{{image}}"></img>
+				</div>
+				<div id="block-2" class="block"></div>
+				<div id="circle" class="block"></div>
+				<div id="block-3" class="block"></div>
+				<div id="stmt-2" class="stmt">
+					{{fragment_2}}
+				</div>
+				<div id="stmt-3" class="stmt">
+					{{fragment_3}}
+				</div>
+				<div id="handle">
+					@{{name}}
+				</div>
+				<div id="mashifesto-handle">
+					@mashifesto
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="kevin" type="text/html">
+		<div class="mashifesto kevin">
+			<div id="stmt-0" class="stmt">
+				{{fragment_0}}
+			</div>
+			<div id="block-0" class="block"></div>
+			<div class="col-1">
+				<div id="stmt-1" class="stmt">
+					{{fragment_1}}
+				</div>
+				<div id="left-block" class="block"></div>
+				<div id="hands-left" class="block"></div>
+			</div>
+			<div class="col-2">
+				<div id="block-1" class="block">
+					<img src="{{image}}" />
+				</div>
+				<div id="hands-right" class="block"></div>
+				<div id="block-3" class="block"></div>
+				<div id="stmt-2" class="stmt">
+					{{fragment_2}}
+				</div>
+				<div id="stmt-3" class="stmt">
+					{{fragment_3}}
+				</div>
+				<div id="handle">
+					@{{name}}
+				</div>
+				<div id="mashifesto-handle">
+					@mashifesto
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="ben" type="text/html">
+		<div class="mashifesto ben">
+			<div id="arrow" class="block"></div>
+			<div id="stmt-0" class="stmt">
+				{{fragment_0}}
+			</div>
+			<div id="block-0" class="block"></div>
+			<div class="col-1">
+				<div id="stmt-1" class="stmt">
+					{{fragment_1}}
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="mashifesto-row">
+					<div id="circle" class="block"></div>
+					<div id="avatar" class="block">
+						<img src="{{image}}"></img>
+					</div>
+				</div>
+				<div id="block-3" class="block"></div>
+				<div id="stmt-2" class="stmt">
+					{{fragment_2}}
+				</div>
+				<div id="stmt-3" class="stmt">
+					{{fragment_3}}
+				</div>
+				<div id="mashifesto-handle">
+					@mashifesto
+				</div>
+				<div id="handle">
+					@{{name}}
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+</body>
+</html>
