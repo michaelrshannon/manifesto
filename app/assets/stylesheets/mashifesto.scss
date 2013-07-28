@@ -1,11 +1,64 @@
 @import "fonts";
 
-body {
-	background: url(/assets/background-2.jpg) no-repeat center center fixed;
-	-webkit-font-smoothing: antialiased;
-	background-size: cover;
-	height: 100%;
-	overflow: hidden;
+@mixin animation ($delay, $duration, $animation) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+
+@mixin animation-iteration-count ($iteration) {
+    -webkit-animation-iteration-count: $iteration;
+    -moz-animation-iteration-count: $iteration;
+    -o-animation-iteration-count: $iteration;
+    animation-iteration-count: $iteration;
+}
+
+@mixin animation-timing-function ($value) {
+	-webkit-animation-timing-function: $value;
+	-moz-animation-timing-function: $value;
+	-o-animation-timing-function: $value;
+	animation-timing-function: $value;
+}
+
+@mixin transition-timing-function ($value) {
+	-webkit-transition-timing-function: $value;
+	-moz-transition-timing-function: $value;
+	-o-transition-timing-function: $value;
+	transition-timing-function: $value;
+}
+
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-o-keyframes $animation_name {
+        @content;
+    }
+ 
+    @keyframes $animation_name {
+        @content;
+    }
 }
 
 @mixin transform ($value) {
@@ -13,6 +66,28 @@ body {
 	-moz-transform: $value;
 	-o-transform: $value;
 	transform: $value;	
+}
+
+@include keyframe(rotate) {
+    0% {
+        @include transform(rotate(0deg));
+    }
+ 
+    100% {
+        @include transform(rotate(360deg));
+    }
+}
+
+@include keyframe(slide) {
+	100% { left: 0; }
+}
+
+body {
+	background: url(/assets/background-2.jpg) no-repeat center center fixed;
+	-webkit-font-smoothing: antialiased;
+	background-size: cover;
+	height: 100%;
+	overflow: hidden;
 }
 
 @mixin transform-origin ($value) {
@@ -308,6 +383,10 @@ $pad: $gutterWidth;
 			position: absolute;
 			left: calc-push(10.5);
 			top: 280px;
+
+			@include animation(0s, 4s, rotate);
+			@include animation-timing-function(linear);
+			@include animation-iteration-count(infinite);
 		}
 
 		#block-3 {

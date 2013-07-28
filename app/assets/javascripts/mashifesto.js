@@ -49,7 +49,7 @@ $(function () {
 			TweenMax.from('#handle', 1, {left: '2000px', delay: 5.75});
 			TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 6});
 
-			//TweenMax.to('.mashifesto', 2, {top: '2546px', left: '1721px', delay: 9});
+			TweenMax.to('.mashifesto', 2, {top: '-2546px', left: '-1721px', delay: 9});
 		}
 	}
 
@@ -67,5 +67,5 @@ $(function () {
 
 	var template = 'michael';
 	animate(template);
-	//setInterval(function() { animate(template); }, 10000);
+	setInterval(function() { animate(template); }, 10000);
 });
