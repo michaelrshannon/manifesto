@@ -5,7 +5,13 @@
 		// properties
 		
 			/** @type {DataModel}	The DataModel */
-			model:null,
+			model					:null,
+			
+			/** @type {Number}		The play count */
+			count					:0,
+			
+			/** @type {Number}		The max number of slides to play between video */
+			maxCount				:5,
 			
 		
 		// -------------------------------------------------------------------------------------
@@ -68,7 +74,32 @@
 			 */
 			getNext:function()
 			{
-				this.model.getNext($.proxy(this.onNext, this));
+				console.log('next slide');
+				this.count % this.maxCount == 0
+					? this.showVideo()
+					: this.model.getNext($.proxy(this.onNext, this));
+			},
+			
+			showVideo:function()
+			{
+				// debug
+					console.log('video');
+					
+				// set video
+					var html = $('#video').html();
+					$('#wrapper').html(html);
+					
+				// determine width and height
+					var width	= $(document).width() * 0.7;
+					var height	= width / 16 * 9;
+					
+				// update video size depending on screen size
+					$('iframe')
+						.attr('width', width)
+						.attr('height', height);
+					
+				// set timeout to load next slide
+					setTimeout($.proxy(this.onComplete, this), 15 * 1000);
 			},
 			
 		// -------------------------------------------------------------------------------------
@@ -100,6 +131,7 @@
 			 */
 			onComplete:function()
 			{
+				this.count++;
 				this.getNext();
 			}
 			
