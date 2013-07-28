@@ -84,7 +84,10 @@
 					var statement = new Statement(data);
 					
 				// create a new slide object (slides control their own HTML creation and injection)
-					var slide = new RedSlide('#wrapper', statement);
+					var slide = Slide.factory('#wrapper', statement);
+					
+				// debug
+					console.log(slide);
 					
 				// tell the slide to animate
 					slide.animate($.proxy(this.onComplete, this));
