@@ -27,7 +27,7 @@
 		
 	function DataModel(app)
 	{
-		this.load(this.server + 'statements/all.json', onLoad)
+		this.getAll();
 	}
 	
 	DataModel.prototype =
@@ -49,6 +49,18 @@
 		// -------------------------------------------------------------------------------------
 		// methods
 		
+			getAll:function(onLoad)
+			{
+				var that = this;
+				this.load(this.server + 'statements/all.json', function(data)
+				{
+					for (var i=0; i < data.length; i++)
+					{
+						that.statements.push(new Statement(data[i]));
+					}
+				});
+			},
+		
 			getNext:function(onLoad)
 			{
 				this.load(this.server + 'statement/next.json', onLoad);
@@ -61,17 +73,18 @@
 				
 				var that = this;
 
-				$.get(url, function(data){
-					onLoad(that.addStatement(data));
+				$.get(url, function(json){
+					
+					// blatant hack, as JSON does not seem to be loading locally
+						json				= json.replace(/[\r\n]/g, '');
+						var data			= JSON.parse(json);
+					
+					// debug
+						console.log(data);
+
+					// call handler
+						onLoad(data);
 					}, 'JSON');
-			},
-			
-			addStatement:function(data)
-			{
-				var statement = new Statement(data);
-				this.statements.push(statement);
-				return statement;
-				
 			},
 			
 
@@ -89,21 +102,19 @@
 	// -------------------------------------------------------------------------------------
 	// Statement
 			
-		function Statement(json)
+		function Statement(values)
 		{
-			// variables
-				// blatant hack, as JSON does not seem to be loading locally
-				json				= json.replace(/[\r\n]/g, '');
-				var values				= JSON.parse(json);
-				
 			// properties
 				this.id			= values.id;
 				this.date		= new Date(values.date);
 				this.user		= new User(values.user);
 				this.fragments	= values.fragments;
-				for (var i=0; i < values.tweets.length; i++)
+				if(values.tweets)
 				{
-					this.tweets.push(new Tweet(values.tweets[i]));
+					for (var i=0; i < values.tweets.length; i++)
+					{
+						this.tweets.push(new Tweet(values.tweets[i]));
+					}
 				}
 		}
 		
