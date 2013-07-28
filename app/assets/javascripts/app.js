@@ -85,9 +85,10 @@
 				// debug
 					console.log('video');
 					
-				// set video
+				// set html
 					var html = $('#video').html();
 					$('#wrapper').html(html);
+					$('body').attr('class', 'video');
 					
 				// determine width and height
 					var width	= $(document).width() * 0.7;
@@ -99,7 +100,7 @@
 						.attr('height', height);
 					
 				// set timeout to load next slide
-					setTimeout($.proxy(this.onComplete, this), 15 * 1000);
+					setTimeout($.proxy(this.onComplete, this), 10 * 1000);
 			},
 			
 		// -------------------------------------------------------------------------------------
