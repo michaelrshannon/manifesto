@@ -1,5 +1,8 @@
 require 'resque/server'
 Manifesto::Application.routes.draw do
+  resources :mentions
+
+
   ### Resque server interface
   unless %w(development staging).include?(Rails.env)
     resque_constraint = lambda do |request|
@@ -10,7 +13,7 @@ Manifesto::Application.routes.draw do
   constraints resque_constraint do
     mount Resque::Server, :at => '/admin/debug/resque'
   end
-###
+  ###
 
   get 'ping' => 'home#ping'
   get 'statements' => 'statements#index', :as => :statements
