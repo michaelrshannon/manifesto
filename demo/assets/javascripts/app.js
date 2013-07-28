@@ -7,12 +7,14 @@
 			/** @type {DataModel}	The DataModel */
 			model:null,
 			
-			//styles = ['red', 'blue']
-		
 		
 		// -------------------------------------------------------------------------------------
 		// initialize
 		
+			/**
+			 * Main initialalization function
+			 * Sets up document, template stettings, etc
+			 */
 			initialize:function()
 			{
 				// debug
@@ -35,7 +37,7 @@
 						// Set up the scaling
 						var totalWidth		= 900;
 						var scale			= $(window).height() / totalWidth;
-						var wrapper			= $('.wrapper');
+						var wrapper			= $('#wrapper');
 						setTransform(wrapper, 'scale('+ scale +')');
 						wrapper.css('margin-top', - (totalWidth / 2) * scale);
 					}
@@ -49,14 +51,22 @@
 		// -------------------------------------------------------------------------------------
 		// methods
 		
+			/**
+			 * Kicks off the application once initialized, loads model data
+			 */
 			start:function()
 			{
 				// set up model
 					this.model = new DataModel();
+					
+				// get next statement
 					this.getNext();
 			},
 		
-			getNext:function(data)
+			/**
+			 * Gets the next sattement from the database
+			 */
+			getNext:function()
 			{
 				this.model.getNext($.proxy(this.onNext, this));
 			},
@@ -64,18 +74,25 @@
 		// -------------------------------------------------------------------------------------
 		// handlers
 		
+			/**
+			 * Handler for the completion of getNext() statement
+			 * @param	{Object}	data	JSON statement Object
+			 */
 			onNext:function(data)
 			{
-				// debug
+				// create a new Statement instance
 					var statement = new Statement(data);
-					console.log('Loaded statement:' , statement);
 					
-				// stuff
-					var slide = new Slide('.wrapper', statement);
-					console.log(this);
+				// create a new slide object (slides control their own HTML creation and injection)
+					var slide = new RedSlide('#wrapper', statement);
+					
+				// tell the slide to animate
 					slide.animate($.proxy(this.onComplete, this));
 			},
 			
+			/**
+			 * Handler for the completion of slide animation 
+			 */
 			onComplete:function()
 			{
 				this.getNext();
@@ -84,8 +101,9 @@
 		
 	}
 	
-	
 	$(function(){
 		App.initialize();
 		App.start();
 		});
+	
+	

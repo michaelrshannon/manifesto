@@ -1,28 +1,4 @@
 // -------------------------------------------------------------------------------------
-// Class structure
-
-/*
-	- Manifesto
-	  - Statements
-		- Statement
-		  - fragments
-			- Fragment
-			  - text
-			  - type
-				- stock
-				- user
-		  - tweets
-			- Tweet
-			  - id
-			  - text
-			  - user
-				- User
-				  - name
-				  - image url
-*/
-
-
-// -------------------------------------------------------------------------------------
 // DataModel
 		
 	function DataModel(app)
@@ -63,6 +39,7 @@
 		
 			getNext:function(onLoad)
 			{
+				// need to add code here to randomise if we reach the end
 				this.load(this.server + 'statement/next.json', onLoad);
 			},
 			
@@ -80,7 +57,7 @@
 						var data			= JSON.parse(json);
 					
 					// debug
-						console.log(data);
+						//console.log(data);
 
 					// call handler
 						onLoad(data);
