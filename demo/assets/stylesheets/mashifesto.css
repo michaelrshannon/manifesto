@@ -324,6 +324,11 @@ body {
   width: 6em;
 }
 
+#avatar img{
+	height:100%;
+}
+
+
 .mashifesto.michael #avatar {
   width: 210px;
   height: 210px;
