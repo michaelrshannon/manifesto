@@ -38,12 +38,15 @@ class TwitterUser < ActiveRecord::Base
   end
 
   def self.check_mentions
-    @@client.mentions_timeline.each do |mention|
-      screen_name = mention.user.screen_name
-      unless TwitterUser.find_by_screen_name(screen_name)
-        Resque.enqueue(LoadTweets, screen_name)
+    begin
+      @@client.mentions_timeline.each do |mention|
+        screen_name = mention.user.screen_name
+        unless TwitterUser.find_by_screen_name(screen_name)
+          Resque.enqueue(LoadTweets, screen_name)
+        end
       end
-
+    rescue Twitter::Error::TooManyRequests
+      logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in TwitterUser::check_mentions'
     end
   end
 end
