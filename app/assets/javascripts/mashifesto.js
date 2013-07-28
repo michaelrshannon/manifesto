@@ -10,7 +10,7 @@ $(function () {
 	}
 
 	function animate(templateName) {
-		$('.wrapper').html(ich[templateName]({part1:'We must unite'}));
+		$('#animation').html(ich[templateName]({part1:'We must unite'}));
 
 		if(templateName === 'red') {
 			TweenMax.to('.mashifesto', 0, {top: '0px', left: '0px'});
@@ -101,7 +101,7 @@ $(function () {
 		// Set up the scaling
 		var totalWidth = 900;
 		var scale = $(window).height() / totalWidth;
-		var wrapper = $('.wrapper');
+		var wrapper = $('#animation');
 		setTransform(wrapper, 'scale('+ scale +')');
 		wrapper.css('margin-top', - (totalWidth / 2) * scale);
 	}
@@ -110,10 +110,11 @@ $(function () {
 	$(window).resize(setScale);
 
 	function pickTemplate() {
-		var index = Math.floor(Math.random()*2);
-		return ['red', 'michael'][index];	
+		var index = Math.floor(Math.random()*4);
+		//return ['red', 'michael', 'kevin', 'ben'][index];	
+		return 'michael';
 	}
 	
 	animate(pickTemplate());
-	setInterval(function() { animate(pickTemplate()); }, 10000);
+	//setInterval(function() { animate(pickTemplate()); }, 10000);
 });
