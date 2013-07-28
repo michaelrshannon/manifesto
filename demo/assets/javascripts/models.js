@@ -1,28 +1,4 @@
 // -------------------------------------------------------------------------------------
-// Class structure
-
-/*
-	- Manifesto
-	  - Statements
-		- Statement
-		  - fragments
-			- Fragment
-			  - text
-			  - type
-				- stock
-				- user
-		  - tweets
-			- Tweet
-			  - id
-			  - text
-			  - user
-				- User
-				  - name
-				  - image url
-*/
-
-
-// -------------------------------------------------------------------------------------
 // DataModel
 		
 	function DataModel(app)
@@ -63,6 +39,7 @@
 		
 			getNext:function(onLoad)
 			{
+				// need to add code here to randomise if we reach the end
 				this.load(this.server + 'statement/next.json', onLoad);
 			},
 			
@@ -80,7 +57,7 @@
 						var data			= JSON.parse(json);
 					
 					// debug
-						console.log(data);
+						//console.log(data);
 
 					// call handler
 						onLoad(data);
@@ -133,7 +110,6 @@
 			// -------------------------------------------------------------------------------------
 			// methods
 			
-				
 	
 			// -------------------------------------------------------------------------------------
 			// utilities
@@ -216,12 +192,13 @@
 	// -------------------------------------------------------------------------------------
 	// User
 			
-		function Location(location)
+		function Location(location, name)
 		{
 			if(location)
 			{
 				this.lng		= location.lng || 0;
 				this.lat		= location.lat || 0;
+				this.name		= name || null;
 			}
 		}
 		
@@ -232,6 +209,7 @@
 			
 				lng			:0,
 				lat			:0,
+				name		:null,
 				
 				
 			// -------------------------------------------------------------------------------------

@@ -11,6 +11,7 @@ $(function () {
 
 	function animate(templateName) {
 		$('#animation').html(ich[templateName]({part1:'We must unite'}));
+		$('body')[0].className = templateName;
 
 		if(templateName === 'red') {
 			TweenMax.to('.mashifesto', 0, {top: '0px', left: '0px'});
@@ -131,8 +132,7 @@ $(function () {
 
 	function pickTemplate() {
 		var index = Math.floor(Math.random()*4);
-		//return ['red', 'michael', 'kevin', 'ben'][index];	
-		return 'bryce';
+		return ['red', 'michael', 'kevin', 'ben'][index];	
 	}
 	
 	animate(pickTemplate());
