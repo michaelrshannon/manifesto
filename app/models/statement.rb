@@ -186,7 +186,7 @@ class Statement < ActiveRecord::Base
           fragment2: first_tweet[:text],
           fragment3: random_template[:second],
           fragment4: second_tweet[:text],
-          picture_url: user.profile_image_url,
+          picture_url: user.profile_image_url.gsub('_normal', '_bigger'),
           screen_name: user.screen_name,
           first_tweet: first_tweet[:id],
           second_tweet: second_tweet[:id]
