@@ -952,14 +952,6 @@ $pad: $gutterWidth;
 			float: right;
 		}
 
-		.stars {
-			background: url(/assets/stars.svg);
-			background-size: cover;
-			@include columns(3);
-			height: 50px;
-			opacity: $redOpacity;
-		}
-
 		.white-block {
 			background-color: #FFF;
 			opacity: $redOpacity;
@@ -1020,10 +1012,15 @@ $pad: $gutterWidth;
 			margin-bottom: $pad * 3;
 		}
 
-		#block-2 {
-			@extend .stars;
-			@include push(3);
-			margin-bottom: $pad / 2;
+		#hand {
+			background-image: url(/assets/thumbs-down.png);
+			background-size: 100%;
+			background-repeat: no-repeat;
+			@include columns(6);
+			height: 400px;
+			@include transform(rotate(25deg));
+			margin-top: -182px;
+			left: 107px;
 		}
 
 		#block-3 {
