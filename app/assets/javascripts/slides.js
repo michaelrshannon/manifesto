@@ -54,7 +54,7 @@
 					
 				// expose to window
 					window[name] = def;
-					console.log(name);
+					//console.log(name);
 					
 				// extend
 					def.prototype = new Slide;

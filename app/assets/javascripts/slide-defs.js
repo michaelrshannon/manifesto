@@ -46,7 +46,7 @@
 				TweenMax.from('#stmt-3', 1, {left: '2000px', delay: 4.5});
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 4.75});
 	
-				TweenMax.to('.mashifesto', 2, {top: '2546px', left: '1721px', delay: 8.5, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '2546px', left: '1721px', delay: 12, onComplete:onComplete});
 			}
 		}
 		
@@ -77,7 +77,7 @@
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 5.75});
 				TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 6});
 	
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 12, onComplete:onComplete});
 
 			}
 		}
@@ -111,7 +111,7 @@
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 5.5});
 				TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 5.75});
 				
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 12, onComplete:onComplete});
 			}
 		}
 		
@@ -143,7 +143,7 @@
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 4.75});
 				TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 4.9});
 				
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 12, onComplete:onComplete});
 			}
 		}
 		
@@ -172,7 +172,7 @@
 				TweenMax.from('#handle', 1, {left: '2000px', delay: 5.5});
 				TweenMax.from('#mashifesto-handle', 1, {left: '2000px', delay: 5.75});
 
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 12, onComplete:onComplete});
 			}
 		}
 		
@@ -203,11 +203,10 @@
 				TweenMax.from('#handle', 1, {top: '2000px', delay: 4.75});
 				TweenMax.from('#mashifesto-handle', 1, {top: '2000px', delay: 5});
 
-				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9, onComplete:onComplete});
+				TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 12, onComplete:onComplete});
 			}
 		}
 		
-		console.log('adding empty slide');
 		Slides.getDefinition('EmptySlide', 'empty', props);
 
 
@@ -219,7 +218,6 @@
 			}
 		}
 		
-		console.log('adding empty slide');
 		Slides.getDefinition('VimeoSlide', 'vimeo', props);
 
 
