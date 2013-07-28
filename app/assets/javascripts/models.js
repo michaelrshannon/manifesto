@@ -5,7 +5,7 @@
 	{
 		this.server = location.protocol === 'file:'
 						? 'api/'
-						: 'http://staging.mashifesto.org/';
+						: 'http://www.mashifesto.org/';
 						// 'http://mashifesto-staging.herokuapp.com/'
 		
 	}
