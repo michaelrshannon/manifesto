@@ -76,15 +76,16 @@
 			{
 				console.log('next slide');
 				this.count % this.maxCount == 0
-					? this.showSplash()
+					? this.showVideo()
 					: this.model.getNext($.proxy(this.onNext, this));
 			},
 			
-			showSplash:function()
+			showVideo:function()
 			{
-				console.log('vimeo');
-				$('#wrapper').html('vimeo');
-				setTimeout($.proxy(this.onComplete, this), 2000);
+				console.log('video');
+				var html = $('#video').html();
+				$('#wrapper').html(html);
+				setTimeout($.proxy(this.onComplete, this), 15 * 1000);
 			},
 			
 		// -------------------------------------------------------------------------------------

@@ -218,7 +218,6 @@
 			}
 		}
 		
-		console.log('adding empty slide');
 		Slides.getDefinition('VimeoSlide', 'vimeo', props);
 
 
