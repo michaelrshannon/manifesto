@@ -98,7 +98,7 @@
 				TweenMax.from('#block-0', 1, {bottom: '-2000px', delay: 0.25});
 	
 				TweenMax.from('#stmt-1', 1, {bottom: '-2000px', delay: 2.25});
-				TweenMax.from('#block-1', 1, {right: '-2000px', delay: 2.5});
+				TweenMax.from('#avatar', 1, {right: '-2000px', delay: 2.5});
 				TweenMax.from('#left-block', 1, {right: '-2000px', delay: 2.75});			
 				TweenMax.from('#block-3', 1, {right: '-2000px', delay: 2.75});
 	
@@ -208,5 +208,17 @@
 		}
 		
 		Slides.getDefinition('EmptySlide', 'empty', props);
+
+
+		props =
+		{
+			animate:function(onComplete)
+			{
+				setTimeout(onComplete, 5000);
+			}
+		}
+		
+		console.log('adding empty slide');
+		Slides.getDefinition('VimeoSlide', 'vimeo', props);
 
 
