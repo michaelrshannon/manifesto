@@ -1,168 +1,133 @@
+<!-- templates -->
 <script id="red" type="text/html">
-	<div class="mashifesto">
-		<div id="stmt-0" class="stmt">
-			{{part1}}
-		</div>
-		<div id="block-0" class="block"></div>
-		<div class="col-1">
-			<div id="stmt-1" class="stmt">
-				I spent 45 minutes on the phone to HMRC
-			</div>
-		</div>
-		<div class="col-2">
-			<div id="block-1" class="block"></div>
-			<div id="block-2" class="block"></div>
-			<div id="block-3" class="block"></div>
-			<div id="stmt-2" class="stmt">
-				and I want
-			</div>
-			<div id="stmt-3" class="stmt">
-				a panda in a microwave."
-			</div>
-			<div id="handle">
-				@JoeScarboro
-			</div>
-		</div>
-	</div>
+  <div class="mashifesto red">
+    <div id="stmt-0" class="stmt">
+      {{fragment_0}}
+    </div>
+    <div id="block-0" class="block"></div>
+    <div class="col-1">
+      <div id="stmt-1" class="stmt">
+        {{fragment_1}}
+      </div>
+    </div>
+    <div class="col-2">
+      <div id="block-1" class="block"></div>
+      <div id="block-2" class="block"></div>
+      <div id="block-3" class="block"></div>
+      <div id="stmt-2" class="stmt">
+        {{fragment_2}}
+      </div>
+      <div id="stmt-3" class="stmt">
+        {{fragment_3}}
+      </div>
+      <div id="handle">
+        @{{name}}
+      </div>
+    </div>
+  </div>
 </script>
 
 <script id="michael" type="text/html">
-	<div class="mashifesto">
-		<div id="stmt-0" class="stmt">
-			{{part1}}
-		</div>
-		<div id="block-0" class="block"></div>
-		<div class="col-1">
-			<div id="stmt-1" class="stmt">
-				I spent 45 minutes on the phone to HMRC
-			</div>
-		</div>
-		<div class="col-2">
-			<div id="avatar" class="block">
-				<img src="https://si0.twimg.com/profile_images/3667382710/d2d5d04262024df77b1769a3d2c13c00.jpeg"></img>
-			</div>
-			<div id="block-2" class="block"></div>
-			<div id="circle" class="block"></div>
-			<div id="block-3" class="block"></div>
-			<div id="stmt-2" class="stmt">
-				and I want
-			</div>
-			<div id="stmt-3" class="stmt">
-				a panda in a microwave."
-			</div>
-			<div id="handle">
-				@JoeScarboro
-			</div>
-			<div id="mashifesto-handle">
-				@mashifesto
-			</div>
-		</div>
-	</div>
+  <div class="mashifesto michael">
+    <div id="stmt-0" class="stmt">
+      {{fragment_0}}
+    </div>
+    <div id="block-0" class="block"></div>
+    <div class="col-1">
+      <div id="stmt-1" class="stmt">
+        {{fragment_1}}
+      </div>
+    </div>
+    <div class="col-2">
+      <div id="avatar" class="block">
+        <img src="{{image}}"></img>
+      </div>
+      <div id="block-2" class="block"></div>
+      <div id="circle" class="block"></div>
+      <div id="block-3" class="block"></div>
+      <div id="stmt-2" class="stmt">
+        {{fragment_2}}
+      </div>
+      <div id="stmt-3" class="stmt">
+        {{fragment_3}}
+      </div>
+      <div id="handle">
+        @{{name}}
+      </div>
+      <div id="mashifesto-handle">
+        @mashifesto
+      </div>
+    </div>
+  </div>
 </script>
 
 <script id="kevin" type="text/html">
-	<div class="mashifesto">
-		<div id="stmt-0" class="stmt">
-			I long for a day
-		</div>
-		<div id="block-0" class="block"></div>
-		<div class="col-1">
-			<div id="stmt-1" class="stmt">
-				when you’re allergic to nuts
-			</div>
-			<div id="left-block" class="block"></div>
-			<div id="hands-left" class="block"></div>
-		</div>
-		<div class="col-2">
-			<div id="block-1" class="block">
-				<img src="https://si0.twimg.com/profile_images/3667382710/d2d5d04262024df77b1769a3d2c13c00.jpeg"></img>
-			</div>
-			<div id="hands-right" class="block"></div>
-			<div id="block-3" class="block"></div>
-			<div id="stmt-2" class="stmt">
-				and
-			</div>
-			<div id="stmt-3" class="stmt">
-				I will have three friends visiting from France this week
-			</div>
-			<div id="handle">
-				@kplattit
-			</div>
-			<div id="mashifesto-handle">
-				@mashifesto
-			</div>
-		</div>
-	</div>
+  <div class="mashifesto kevin">
+    <div id="stmt-0" class="stmt">
+      {{fragment_0}}
+    </div>
+    <div id="block-0" class="block"></div>
+    <div class="col-1">
+      <div id="stmt-1" class="stmt">
+        {{fragment_1}}
+      </div>
+      <div id="left-block" class="block"></div>
+      <div id="hands-left" class="block"></div>
+    </div>
+    <div class="col-2">
+      <div id="block-1" class="block">
+        <img src="{{image}}"></img>
+      </div>
+      <div id="hands-right" class="block"></div>
+      <div id="block-3" class="block"></div>
+      <div id="stmt-2" class="stmt">
+        {{fragment_2}}
+      </div>
+      <div id="stmt-3" class="stmt">
+        {{fragment_3}}
+      </div>
+      <div id="handle">
+        @{{name}}
+      </div>
+      <div id="mashifesto-handle">
+        @mashifesto
+      </div>
+    </div>
+  </div>
 </script>
 
 <script id="ben" type="text/html">
-	<div class="mashifesto">
-		<div id="arrow" class="block"></div>
-		<div id="stmt-0" class="stmt">
-			I long for a day
-		</div>
-		<div id="block-0" class="block"></div>
-		<div class="col-1">
-			<div id="stmt-1" class="stmt">
-				when you’re allergic to nuts
-			</div>
-		</div>
-		<div class="col-2">
-			<div class="mashifesto-row">
-				<div id="circle" class="block"></div>
-				<div id="avatar" class="block">
-					<img src="https://si0.twimg.com/profile_images/3667382710/d2d5d04262024df77b1769a3d2c13c00.jpeg"></img>
-				</div>
-			</div>
-			<div id="block-3" class="block"></div>
-			<div id="stmt-2" class="stmt">
-				and
-			</div>
-			<div id="stmt-3" class="stmt">
-				I will have three friends visiting
-			</div>
-			<div id="mashifesto-handle">
-				@mashifesto
-			</div>
-			<div id="handle">
-				@kplattit
-			</div>
-		</div>
-	</div>
+  <div class="mashifesto ben">
+    <div id="arrow" class="block"></div>
+    <div id="stmt-0" class="stmt">
+      {{fragment_0}}
+    </div>
+    <div id="block-0" class="block"></div>
+    <div class="col-1">
+      <div id="stmt-1" class="stmt">
+        {{fragment_1}}
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="mashifesto-row">
+        <div id="circle" class="block"></div>
+        <div id="avatar" class="block">
+          <img src="{{image}}"></img>
+        </div>
+      </div>
+      <div id="block-3" class="block"></div>
+      <div id="stmt-2" class="stmt">
+        {{fragment_2}}
+      </div>
+      <div id="stmt-3" class="stmt">
+        {{fragment_3}}
+      </div>
+      <div id="mashifesto-handle">
+        @mashifesto
+      </div>
+      <div id="handle">
+        @{{name}}
+      </div>
+    </div>
+  </div>
 </script>
-
-<script id="bryce" type="text/html">
-	<div class="mashifesto">
-		<div id="stmt-0" class="stmt">
-			{{part1}}
-		</div>
-		<div id="block-0" class="block"></div>
-		<div class="col-1">
-			<div id="stmt-1" class="stmt">
-				I spent 45 minutes on the phone to HMRC
-			</div>
-		</div>
-		<div class="col-2">
-			<div id="avatar" class="block">
-				<img src="https://si0.twimg.com/profile_images/3667382710/d2d5d04262024df77b1769a3d2c13c00.jpeg"></img>
-			</div>
-			<div id="block-3" class="block"></div>
-			<div id="stmt-2" class="stmt">
-				and I want
-			</div>
-			<div id="stmt-3" class="stmt">
-				a panda in a microwave."
-			</div>
-			<div id="handle">
-				@JoeScarboro
-			</div>
-			<div id="mashifesto-handle">
-				@mashifesto
-			</div>
-		</div>
-	</div>
-</script>
-
-<div id="animation">
-	
-</div>

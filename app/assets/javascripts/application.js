@@ -12,4 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require underscore
+//= require zepto
+//= require TweenMax.min
+//= require models
+//= require slides
+//= require slide-defs
+//= require app
