@@ -10,7 +10,7 @@
 		 *
 		 * Each "slide" is a class. It controls its own rendering and animation.
 		 *
-		 * Add new Slide subclasses using Slide.addDefinition() and passing in properties
+		 * Add new Slide subclasses using Slides.addDefinition() and passing in properties
 		 *
 		 * Slides are then created in the App class, by first loading data from the model,
 		 * and calling Slide.factory(), which gets a new Slide type
@@ -50,7 +50,7 @@
 			}
 		}
 		
-		Slide.addDefinition('RedSlide', 'red',  props);
+		Slides.addDefinition('RedSlide', 'red',  props);
 		
 	// -------------------------------------------------------------------------------------
 	// Red Slide
@@ -82,7 +82,7 @@
 			}
 		}
 		
-		Slide.addDefinition('MichaelSlide', 'michael', props);
+		Slides.addDefinition('MichaelSlide', 'michael', props);
 
 
 	// -------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@
 			}
 		}
 		
-		Slide.addDefinition('KevinSlide', 'kevin', props);
+		Slides.addDefinition('KevinSlide', 'kevin', props);
 
 
 
@@ -147,7 +147,7 @@
 			}
 		}
 		
-		Slide.addDefinition('BenSlide', 'ben', props);
+		Slides.addDefinition('BenSlide', 'ben', props);
 
 
 	// -------------------------------------------------------------------------------------
@@ -176,11 +176,13 @@
 			}
 		}
 		
-		Slide.addDefinition('BryceSlide', 'bryce', props);
+		Slides.addDefinition('BryceSlide', 'bryce', props);
+		
 
+	// -------------------------------------------------------------------------------------
 	// Empty slide
 
-	props =
+		props =
 		{
 			animate:function(onComplete)
 			{
@@ -205,6 +207,7 @@
 			}
 		}
 		
-		Slide.addDefinition('EmptySlide', 'empty', props);
+		console.log('adding empty slide');
+		Slides.getDefinition('EmptySlide', 'empty', props);
 
 

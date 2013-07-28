@@ -1,5 +1,5 @@
 <ul>
   <% @statements.each do |statement| %>
-    <li><%= statement.to_s %></li>
+    <li><%= statement.to_s %> (<%= statement.screen_name %>)</li>
   <% end %>
 </ul>
