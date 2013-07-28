@@ -125,7 +125,7 @@
 				{
 					var values =
 					{
-						name		:this.statement.user.name,
+						name		:this.statement.user.screenName,
 						image		:this.statement.user.image,
 						fragment_0	:this.statement.fragments[0],
 						fragment_1	:this.statement.fragments[1],
