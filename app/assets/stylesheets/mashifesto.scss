@@ -287,7 +287,7 @@ $pad: $gutterWidth;
 		@include columns-height(12);
 		
 		@include transform-origin(50% 50%);
-		@include transform(rotate(-$baseAngle));
+		@include transform(scale(0.9) rotate(-$baseAngle));
 
 		.stmt {
 			text-transform: uppercase;
@@ -324,7 +324,7 @@ $pad: $gutterWidth;
 		}
 
 		#stmt-0 {
-			@include columns(6);
+			@include columns(9);
 			line-height: $lineHeight;
 			font-family: 'propagandaregular';
 			color: $black;
@@ -372,7 +372,7 @@ $pad: $gutterWidth;
 			@include columns-height(6);
 			position: absolute;
 			left: calc-push(9);
-			top: - $pad / 2;
+			top: -66px;
 		}
 
 		#circle {
@@ -383,7 +383,7 @@ $pad: $gutterWidth;
 			@include columns-height(2);
 			position: absolute;
 			left: calc-push(10.5);
-			top: 280px;
+			top: 220px;
 
 			@include animation(0s, 4s, rotate);
 			@include animation-timing-function(linear);

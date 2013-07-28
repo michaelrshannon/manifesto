@@ -111,10 +111,9 @@ $(function () {
 
 	function pickTemplate() {
 		var index = Math.floor(Math.random()*4);
-		//return ['red', 'michael', 'kevin', 'ben'][index];	
-		return 'michael';
+		return ['red', 'michael', 'kevin', 'ben'][index];	
 	}
 	
 	animate(pickTemplate());
-	//setInterval(function() { animate(pickTemplate()); }, 10000);
+	setInterval(function() { animate(pickTemplate()); }, 10000);
 });
