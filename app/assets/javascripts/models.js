@@ -1,33 +1,9 @@
 // -------------------------------------------------------------------------------------
-// Class structure
-
-/*
-	- Manifesto
-	  - Statements
-		- Statement
-		  - fragments
-			- Fragment
-			  - text
-			  - type
-				- stock
-				- user
-		  - tweets
-			- Tweet
-			  - id
-			  - text
-			  - user
-				- User
-				  - name
-				  - image url
-*/
-
-
-// -------------------------------------------------------------------------------------
 // DataModel
 		
 	function DataModel(app)
 	{
-		this.getAll();
+		//this.getAll();
 	}
 	
 	DataModel.prototype =
@@ -39,8 +15,9 @@
 			app				:null,
 		
 			/** @type {String}	server string */
+      server		:'http://localhost:3000/',
 			//server		:'http://mashifesto-staging.herokuapp.com/',
-			server			:'api/',
+			//server			:'api/',
 			
 			/** @type {Array}	Array of Statement objects */
 			statements		:[],
@@ -63,6 +40,7 @@
 		
 			getNext:function(onLoad)
 			{
+				// need to add code here to randomise if we reach the end
 				this.load(this.server + 'statement/next.json', onLoad);
 			},
 			
@@ -74,13 +52,22 @@
 				var that = this;
 
 				$.get(url, function(json){
-					
+
+            var data;
+
 					// blatant hack, as JSON does not seem to be loading locally
-						json				= json.replace(/[\r\n]/g, '');
-						var data			= JSON.parse(json);
-					
+            if(typeof json === 'string')
+            {
+              json				= json.replace(/[\r\n]/g, '');
+              data			  = JSON.parse(json);
+            }
+          else
+          {
+            data = json;
+          }
+
 					// debug
-						console.log(data);
+						//console.log(data);
 
 					// call handler
 						onLoad(data);
@@ -133,7 +120,6 @@
 			// -------------------------------------------------------------------------------------
 			// methods
 			
-				
 	
 			// -------------------------------------------------------------------------------------
 			// utilities
@@ -216,12 +202,13 @@
 	// -------------------------------------------------------------------------------------
 	// User
 			
-		function Location(location)
+		function Location(location, name)
 		{
 			if(location)
 			{
 				this.lng		= location.lng || 0;
 				this.lat		= location.lat || 0;
+				this.name		= name || null;
 			}
 		}
 		
@@ -232,6 +219,7 @@
 			
 				lng			:0,
 				lat			:0,
+				name		:null,
 				
 				
 			// -------------------------------------------------------------------------------------

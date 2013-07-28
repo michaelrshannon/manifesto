@@ -138,7 +138,7 @@ $pad: $gutterWidth;
 	left: calc-column($num);
 }
 
-#animation {
+#wrapper {
 	// Scaling factor should be overridden by JS.
 	$scale: 0.7;
 	@include transform-origin(50% 0%);

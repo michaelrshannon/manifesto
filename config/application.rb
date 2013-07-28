@@ -68,5 +68,8 @@ module Manifesto
       config.oauth_token = ENV['TWITTER_OAUTH_TOKEN']
       config.oauth_token_secret = ENV['TWITTER_TOKEN_SECRET']
     end
+
+    # Custom directories with classes and modules you want to be autoloadable.
+    config.autoload_paths += %W(#{config.root}/lib/classes)
   end
 end

@@ -111,14 +111,18 @@ class Tweet < ActiveRecord::Base
   def self.update_tweets(username)
     unless TwitterUser.find_by_screen_name(username)
       (1..3).each do |page|
-        tweets = @@client.user_timeline(username, count: 200, page: page)
-        break unless tweets.any?
-        tweets.each do |tweet|
-          Tweet.store_tweet(tweet) unless tweet.retweeted_status
+        begin
+          tweets = @@client.user_timeline(username, count: 200, page: page)
+          break unless tweets.any?
+          tweets.each do |tweet|
+            Tweet.store_tweet(tweet) unless tweet.retweeted_status
+          end
+        rescue Twitter::Error::TooManyRequests
+          logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in Tweet::update_tweets'
         end
       end
     end
-    #ENV['LAST_UPDATE'] = Time.now.to_s
+
   end
 
   def self.find_all_with_coordinates(extra_query='')

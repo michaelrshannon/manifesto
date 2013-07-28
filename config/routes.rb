@@ -1,4 +1,19 @@
+require 'resque/server'
 Manifesto::Application.routes.draw do
+  resources :mentions
+
+
+  ### Resque server interface
+  unless %w(development staging).include?(Rails.env)
+    resque_constraint = lambda do |request|
+      user = request.env['warden'].user
+      request.env['warden'].authenticate? and user.is_a?(AdminUser) and user.email == 'admin@pixelcab.in'
+    end
+  end
+  constraints resque_constraint do
+    mount Resque::Server, :at => '/admin/debug/resque'
+  end
+  ###
 
   get 'ping' => 'home#ping'
   get 'statements' => 'statements#index', :as => :statements
