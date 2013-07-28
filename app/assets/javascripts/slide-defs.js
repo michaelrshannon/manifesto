@@ -207,7 +207,6 @@
 			}
 		}
 		
-		console.log('adding empty slide');
 		Slides.getDefinition('EmptySlide', 'empty', props);
 
 

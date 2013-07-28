@@ -5,7 +5,13 @@
 		// properties
 		
 			/** @type {DataModel}	The DataModel */
-			model:null,
+			model					:null,
+			
+			/** @type {Number}		The play count */
+			count					:0,
+			
+			/** @type {Number}		The max number of slides to play between video */
+			maxCount				:5,
 			
 		
 		// -------------------------------------------------------------------------------------
@@ -68,7 +74,17 @@
 			 */
 			getNext:function()
 			{
-				this.model.getNext($.proxy(this.onNext, this));
+				console.log('next slide');
+				this.count % this.maxCount == 0
+					? this.showSplash()
+					: this.model.getNext($.proxy(this.onNext, this));
+			},
+			
+			showSplash:function()
+			{
+				console.log('vimeo');
+				$('#wrapper').html('vimeo');
+				setTimeout($.proxy(this.onComplete, this), 2000);
 			},
 			
 		// -------------------------------------------------------------------------------------
@@ -100,6 +116,7 @@
 			 */
 			onComplete:function()
 			{
+				this.count++;
 				this.getNext();
 			}
 			
