@@ -1,11 +1,64 @@
 @import "fonts";
 
-body {
-	background: url(/assets/background-2.jpg) no-repeat center center fixed;
-	-webkit-font-smoothing: antialiased;
-	background-size: cover;
-	height: 100%;
-	overflow: hidden;
+@mixin animation ($delay, $duration, $animation) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+ 
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+
+@mixin animation-iteration-count ($iteration) {
+    -webkit-animation-iteration-count: $iteration;
+    -moz-animation-iteration-count: $iteration;
+    -o-animation-iteration-count: $iteration;
+    animation-iteration-count: $iteration;
+}
+
+@mixin animation-timing-function ($value) {
+	-webkit-animation-timing-function: $value;
+	-moz-animation-timing-function: $value;
+	-o-animation-timing-function: $value;
+	animation-timing-function: $value;
+}
+
+@mixin transition-timing-function ($value) {
+	-webkit-transition-timing-function: $value;
+	-moz-transition-timing-function: $value;
+	-o-transition-timing-function: $value;
+	transition-timing-function: $value;
+}
+
+@mixin keyframe ($animation_name) {
+    @-webkit-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-moz-keyframes $animation_name {
+        @content;
+    }
+ 
+    @-o-keyframes $animation_name {
+        @content;
+    }
+ 
+    @keyframes $animation_name {
+        @content;
+    }
 }
 
 @mixin transform ($value) {
@@ -15,11 +68,41 @@ body {
 	transform: $value;	
 }
 
+@include keyframe(rotate) {
+    0% {
+        @include transform(rotate(0deg));
+    }
+ 
+    100% {
+        @include transform(rotate(360deg));
+    }
+}
+
+@include keyframe(slide) {
+	100% { left: 0; }
+}
+
+body {
+	background: url(/assets/background-2.jpg) no-repeat center center fixed;
+	-webkit-font-smoothing: antialiased;
+	background-size: cover;
+	height: 100%;
+	overflow: hidden;
+	color: #000;
+}
+
 @mixin transform-origin ($value) {
 	-webkit-transform-origin: $value;
 	-moz-transform-origin: $value;
 	-o-transform-origin: $value;
 	transform-origin: $value;	
+}
+
+@mixin filter ($value) {
+	-webkit-filter: $value;
+	-moz-filter: $value;
+	-o-filter: $value;
+	filter: $value;	
 }
 
 $columnWidth: 50px;
@@ -31,12 +114,16 @@ $pad: $gutterWidth;
 	@return $columnWidth * $num + $gutterWidth * ($num - 1);
 }
 
+@function calc-push($num) {
+	@return $columnWidth * $num + $gutterWidth * $num;
+}
+
 @mixin columns($num) {
 	width: calc-column($num);
 }
 
 @mixin push($num) {
-	margin-left: $columnWidth * $num + $gutterWidth * $num;
+	margin-left: calc-push($num);
 }
 
 @mixin columns-height($num) {
@@ -47,7 +134,7 @@ $pad: $gutterWidth;
 	left: calc-column($num);
 }
 
-.wrapper {
+#animation {
 	// Scaling factor should be overridden by JS.
 	$scale: 0.7;
 	@include transform-origin(50% 0%);
@@ -73,7 +160,7 @@ $pad: $gutterWidth;
 		font-size: $fontSize;
 		line-height: $lineHeight;
 		margin-left: auto;
-   		margin-right: auto;
+		margin-right: auto;
 		
 		@include columns(12);
 		@include columns-height(12);
@@ -176,6 +263,648 @@ $pad: $gutterWidth;
 		#handle {
 			@extend .generated-text;
 			font-size: 0.75 * $fontSize;
+		}
+	}
+
+	&.michael {
+		$black: #000;
+		$red: #d2232a;
+		$blue: #20397c;
+		$baseAngle: 35deg;
+		$fontSize: 2 * $baseHeight;
+		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
+		$blueOpacity: 0.8;
+		$avatarOpacity: 0.7;
+
+		position: relative;
+		font-size: $fontSize;
+		line-height: $lineHeight;
+		margin-left: auto;
+		margin-right: auto;
+		
+		@include columns(12);
+		@include columns-height(12);
+		
+		@include transform-origin(50% 50%);
+		@include transform(scale(0.9) rotate(-$baseAngle));
+
+		.stmt {
+			text-transform: uppercase;
+		}
+
+		.col-1 {
+			@include columns(6);
+			float: left;
+		}
+
+		.col-2 {
+			@include columns(6);
+			float: right;
+		}
+
+		.red-block {
+			background-color: $red;
+			opacity: $redOpacity;
+		}
+
+		.blue-block {
+			background-color: $blue;
+			opacity: $blueOpacity;
+		}
+
+		.generated-text {
+			font-family: 'molotregular';
+			font-size: 1.5 * $fontSize;
+			line-height: $lineHeight;
+		}
+
+		.stmt, .block, #handle, #mashifesto-handle {
+			position: relative;
+		}
+
+		#stmt-0 {
+			@include columns(9);
+			line-height: $lineHeight;
+			font-family: 'propagandaregular';
+			color: $black;
+			margin-bottom: $pad / 2;
+		}
+
+		#block-0 {
+			@extend .blue-block;
+			height: $fontSize;
+			@include columns(9);
+			margin-bottom: $pad;
+		}
+
+		#stmt-1 {
+			@include transform(rotate(90deg));
+			@include transform-origin(top left);
+			@extend .generated-text;
+			opacity: $blueOpacity;
+			color: $blue;
+			position: relative;
+			@include columns-height(6);
+			left: calc-column(6) - $pad / 4; // A little extra padding
+			width: 6em;
+		}
+
+		#avatar {
+			@include columns(3);
+			@include columns-height(3);
+			margin-bottom: $pad / 2;
+			opacity: $avatarOpacity;
+
+			img {
+				border-radius: calc-column(3) / 2;
+				@include filter(grayscale(1));
+			}
+		}
+
+		#block-2 {
+			background-image: url(/assets/redtriangle.svg);
+			background-position: 0% 100%;
+			background-repeat: no-repeat;
+			background-size: auto auto;
+			opacity: $redOpacity;
+			@include columns(8);
+			@include columns-height(6);
+			position: absolute;
+			left: calc-push(9);
+			top: -66px;
+		}
+
+		#circle {
+			background-image: url(/assets/circlemachine.svg);
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			@include columns(2);
+			@include columns-height(2);
+			position: absolute;
+			left: calc-push(10.5);
+			top: 220px;
+
+			@include animation(0s, 4s, rotate);
+			@include animation-timing-function(linear);
+			@include animation-iteration-count(infinite);
+		}
+
+		#block-3 {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(6);
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-2 {
+			font-family: 'propagandaregular';
+			margin-bottom: $pad;
+		}
+
+		#stmt-3 {
+			@extend .generated-text;
+			margin-bottom: 3 * $pad;
+			opacity: $redOpacity;
+			color: $red;
+		}
+
+		#handle {
+			@extend .generated-text;
+			opacity: $redOpacity;
+			color: $red;
+			font-size: 0.75 * $fontSize;
+			margin-bottom: $pad / 2;
+		}
+
+		#mashifesto-handle {
+			@extend .generated-text;
+			@include push(2);
+			color: $black;
+			font-size: 0.5 * $fontSize;
+		}
+
+	}
+
+	&.kevin {
+		$black: #000;
+		$red: #d2232a;
+		$blue: #20397c;
+		$baseAngle: 35deg;
+		$fontSize: 2 * $baseHeight;
+		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
+		$blueOpacity: 0.8;
+		$avatarOpacity: 0.7;
+
+		position: relative;
+		font-size: $fontSize;
+		line-height: $lineHeight;
+		margin-left: auto;
+		margin-right: auto;
+		
+		@include columns(12);
+		@include columns-height(12);
+		
+		@include transform-origin(50% 50%);
+		@include transform(scale(0.8) rotate(-$baseAngle)); // We zoom this out a little bit more
+
+		.stmt {
+			text-transform: uppercase;
+		}
+
+		.col-1 {
+			@include columns(6);
+			float: left;
+		}
+
+		.col-2 {
+			@include columns(6);
+			float: right;
+		}
+
+		.red-block {
+			background-color: $red;
+			opacity: $redOpacity;
+		}
+
+		.blue-block {
+			background-color: $blue;
+			opacity: $blueOpacity;
+		}
+
+		.generated-text {
+			font-family: 'raleway';
+			font-size: 1.1 * $fontSize;
+			line-height: 1.3 * $lineHeight;
+		}
+
+		.static-text {
+			line-height: $lineHeight;
+			font-family: 'molotregular';
+			color: $black;
+		}
+
+		.handle {
+			font-family: 'molotregular';
+			font-size: 1.1 * $fontSize;
+			line-height: 1.3 * $lineHeight;
+		}
+
+		.stmt, .block, #handle, #mashifesto-handle {
+			position: relative;
+		}
+
+		#stmt-0 {
+			@include columns(9);
+			@extend .static-text;
+			margin-bottom: $pad / 2;
+		}
+
+		#block-0 {
+			@extend .blue-block;
+			height: $fontSize;
+			@include columns(9);
+			margin-bottom: $pad;
+		}
+
+		#stmt-1 {
+			@include transform(rotate(90deg));
+			@include transform-origin(top left);
+			@extend .generated-text;
+			opacity: $blueOpacity;
+			color: $blue;
+			position: relative;
+			@include columns-height(6);
+			left: calc-column(6) - $pad / 4; // A little extra padding
+			width: calc-column(6);
+		}
+
+		#left-block {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(5);
+		}
+
+		#hands-left {
+			background-image: url(/assets/hands.png);
+			background-position: 0% 100%;
+			background-repeat: no-repeat;
+			background-size: auto auto;
+			@include columns(5);
+			@include columns-height(6);
+			@include transform(scale(-0.9, -0.9));
+			position: relative;
+			top: -36px;
+			left: 115px;
+		}
+
+		#block-1 {
+			@include columns(3);
+			@include columns-height(3);
+			margin-bottom: $pad / 2;
+			opacity: $avatarOpacity;
+
+			img {
+				border-radius: calc-column(3) / 2;
+				@include filter(grayscale(1));
+			}
+		}
+
+		#hands-right {
+			background-image: url(/assets/hands.png);
+			background-position: 0% 100%;
+			background-repeat: no-repeat;
+			background-size: auto auto;
+			@include columns(5);
+			@include columns-height(6);
+			@include transform(scale(0.9));
+			position: absolute;
+			left: calc-push(8.5);
+			top: - $pad / 2;
+		}
+
+		#block-3 {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(6);
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-2 {
+			@extend .static-text;
+			margin-bottom: $pad;
+		}
+
+		#stmt-3 {
+			@extend .generated-text;
+			margin-bottom: $pad;
+			opacity: $redOpacity;
+			color: $red;
+			@include columns(8);
+		}
+
+		#handle {
+			@extend .handle;
+			opacity: $redOpacity;
+			color: $red;
+			font-size: 0.75 * $fontSize;
+			margin-bottom: $pad / 2;
+		}
+
+		#mashifesto-handle {
+			@extend .handle;
+			@include push(2);
+			color: $black;
+			font-size: 0.5 * $fontSize;
+		}
+
+	}
+
+	&.ben {
+		$black: #000;
+		$red: #d2232a;
+		$blue: #25408F;
+		$baseAngle: 35deg;
+		$fontSize: 2 * $baseHeight;
+		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
+		$blueOpacity: 0.9;
+		$avatarOpacity: 0.7;
+
+		position: relative;
+		font-size: $fontSize;
+		line-height: $lineHeight;
+		margin-left: auto;
+		margin-right: auto;
+
+		@include columns(12);
+		@include columns-height(12);
+		
+		@include transform-origin(50% 50%);
+		@include transform(scale(0.9) rotate(-$baseAngle) translate(-127px, -187px)); // We zoom this out a little bit more
+
+		.stmt {
+			text-transform: uppercase;
+		}
+
+		.col-1 {
+			@include columns(6);
+			float: left;
+		}
+
+		.col-2 {
+			@include columns(6);
+			float: right;
+		}
+
+		.red-block {
+			background-color: $red;
+			opacity: $redOpacity;
+		}
+
+		.blue-block {
+			background-color: $blue;
+			opacity: $blueOpacity;
+		}
+
+		.generated-text {
+			font-family: 'molotregular';
+			font-size: 1.5 * $fontSize;
+			line-height: 1.1 * $lineHeight;
+			opacity: $redOpacity;
+			color: $red;
+		}
+
+		.static-text {
+			line-height: $lineHeight;
+			font-family: 'molotregular';
+			color: $black;
+		}
+
+		.handle {
+			font-family: 'molotregular';
+			font-size: 1.1 * $fontSize;
+			line-height: 1.3 * $lineHeight;
+		}
+
+		.stmt, .block, #handle, #mashifesto-handle {
+			position: relative;
+		}
+
+		#arrow {
+			@include columns(9);
+			height: 187px;
+			margin-bottom: $pad / 2;
+			background-image: url(/assets/bluetriangle.svg);
+			background-repeat: no-repeat;
+			background-position: 50% 0%;
+			background-size: 80%;
+			opacity: $blueOpacity;
+		}
+
+		#stmt-0 {
+			@include columns(9);
+			@extend .static-text;
+			margin-bottom: $pad / 2;
+		}
+
+		#block-0 {
+			@extend .blue-block;
+			height: $fontSize;
+			@include columns(9);
+			margin-bottom: $pad;
+		}
+
+		#stmt-1 {
+			@include transform(rotate(90deg));
+			@include transform-origin(top left);
+			@extend .generated-text;
+			position: relative;
+			@include columns-height(6);
+			left: calc-column(6) - $pad / 4; // A little extra padding
+			width: calc-column(6);
+		}
+
+		#circle {
+			background-image: url(/assets/circlehollow.svg);
+			background-size: 100% 100%;
+			@include columns(3);
+			@include columns-height(3);
+			margin-bottom: $pad / 2;
+			float: left;
+
+			@include animation(0s, 4s, rotate);
+			@include animation-timing-function(linear);
+			@include animation-iteration-count(infinite);
+		}
+
+		#avatar {
+			@include columns(3);
+			@include columns-height(3);
+			margin-bottom: $pad / 2;
+			opacity: $avatarOpacity;
+			@include push(3);
+			position: relative;
+
+			img {
+				border-radius: calc-column(3) / 2;
+				@include filter(grayscale(1));
+			}
+		}
+
+		#block-3 {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(6);
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-2 {
+			@extend .static-text;
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-3 {
+			@extend .generated-text;
+			margin-bottom: 3 * $pad;
+			opacity: $redOpacity;
+			color: $red;
+			@include columns(8);
+		}
+
+		#handle {
+			@extend .handle;
+			opacity: $redOpacity;
+			color: $red;
+			font-size: 0.75 * $fontSize;
+			margin-bottom: $pad / 2;
+			text-align: right;
+			@include columns(8);
+		}
+
+		#mashifesto-handle {
+			@extend .handle;
+			color: $black;
+			font-size: 0.5 * $fontSize;
+			text-align: right;
+			@include columns(8);
+		}
+
+	}
+
+	&.bryce {
+		$black: #000;
+		$red: #d2232a;
+		$blue: #20397c;
+		$baseAngle: 35deg;
+		$fontSize: 2 * $baseHeight;
+		$lineHeight: 0.8em;
+		$redOpacity: 0.8;
+		$blueOpacity: 0.8;
+		$avatarOpacity: 0.7;
+
+		position: relative;
+		font-size: $fontSize;
+		line-height: $lineHeight;
+		margin-left: auto;
+		margin-right: auto;
+		
+		@include columns(12);
+		@include columns-height(12);
+		
+		@include transform-origin(50% 50%);
+		@include transform(scale(0.9) rotate(-$baseAngle));
+
+		.stmt {
+			text-transform: uppercase;
+		}
+
+		.col-1 {
+			@include columns(6);
+			float: left;
+		}
+
+		.col-2 {
+			@include columns(6);
+			float: right;
+		}
+
+		.red-block {
+			background-color: $red;
+			opacity: $redOpacity;
+		}
+
+		.blue-block {
+			background-color: $blue;
+			opacity: $blueOpacity;
+		}
+
+		.generated-text {
+			font-family: 'molotregular';
+			font-size: 1.5 * $fontSize;
+			line-height: $lineHeight;
+			opacity: $redOpacity;
+			color: $red;
+		}
+
+		.stmt, .block, #handle, #mashifesto-handle {
+			position: relative;
+		}
+
+		#stmt-0 {
+			@include columns(6);
+			line-height: $lineHeight;
+			font-family: 'propagandaregular';
+			color: $black;
+			margin-bottom: $pad / 2;
+		}
+
+		#block-0 {
+			@extend .blue-block;
+			height: $fontSize;
+			@include columns(9);
+			margin-bottom: $pad;
+		}
+
+		#stmt-1 {
+			@include transform(rotate(90deg));
+			@include transform-origin(top left);
+			@extend .generated-text;
+			position: relative;
+			@include columns-height(6);
+			left: calc-column(6) - $pad / 4; // A little extra padding
+			width: 6em;
+		}
+
+		#avatar {
+			$imgWidth: 220px;
+			@include columns(5);
+			height: 320px;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+			margin-top: -($pad + $fontSize);
+			background-image: url(/assets/avatarframe.png);
+
+			img {
+				position: relative;
+				left: 47px;
+				top: 41px;
+				width: $imgWidth;
+				height: $imgWidth;
+				border-radius: $imgWidth / 2;
+				@include filter(grayscale(1));
+			}
+		}
+
+		#block-3 {
+			@extend .blue-block;
+			height: $fontSize / 3;
+			@include columns(6);
+			margin-bottom: $pad / 2;
+		}
+
+		#stmt-2 {
+			font-family: 'propagandaregular';
+			margin-bottom: $pad;
+		}
+
+		#stmt-3 {
+			@extend .generated-text;
+			margin-bottom: 3 * $pad;
+		}
+
+		#handle {
+			@extend .generated-text;
+			font-size: 0.75 * $fontSize;
+			margin-bottom: $pad / 2;
+		}
+
+		#mashifesto-handle {
+			@extend .generated-text;
+			@include push(2);
+			color: $black;
+			font-size: 0.5 * $fontSize;
 		}
 
 	}

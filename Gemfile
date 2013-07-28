@@ -5,7 +5,6 @@ gem 'rails', '3.2.13'
 gem 'pg'
 gem 'thin'
 gem 'jquery-rails'
-gem 'bootstrap-sass'
 
 gem 'twitter'
 gem 'httparty'
