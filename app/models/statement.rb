@@ -142,8 +142,8 @@ class Statement < ActiveRecord::Base
   def self.store_statement(user)
     r = Random.new()
 
-    found = false
-    until found
+    found = false; i = 0
+    until found || i > 30
       random_template = TEMPLATES[r.rand(0..(TEMPLATES.size - 1))]
       finders_array = SORTED_FINDERS[random_template[:first]] ? SORTED_FINDERS[random_template[:first]] : FINDERS
 
@@ -155,36 +155,55 @@ class Statement < ActiveRecord::Base
 
       reg = Regexp.new("((#{string})[\s][A-z @'/]*[A-z]+)", Regexp::IGNORECASE)
       first_partial = user.tweets.where('"tweets"."text" ~* ?', reg.source).collect {|t| {:id => t.id, :text => t.text[reg]}}
-      found = true if first_partial.any?
+      if first_partial.any?
+        found = true
+      else
+        i += 1
+      end
       second_partial = user.tweets.where('"tweets"."text" ~* ?', search_regex.source).collect {|t| {:id => t.id, :text => t.text[search_regex]}}
     end
 
-    first_tweet = first_partial[r.rand(0..(first_partial.size - 1))]
-    first_partial.delete_if {|r| r[:text][/I'm at/]}
-    second_partial.delete_if {|r| r[:text][/I'm at/]}
-    unique = false
-    until unique
-      second_tweet = second_partial[r.rand(0..(second_partial.size - 1))]
-      unique = true unless second_tweet == first_tweet
-    end
+    if found
 
-    [first_tweet, second_tweet].each do |tweet|
-      tweet[:text] = tweet[:text].gsub('@', '')
-      tweet[:text] = tweet[:text].gsub(' RT ', '')
-      tweet[:text] = tweet[:text].gsub(' rt ', '')
-      tweet[:text] = tweet[:text].gsub('http', '')
-    end
+      first_tweet = first_partial[r.rand(0..(first_partial.size - 1))]
+      first_partial.delete_if {|r| r[:text][/I'm at/]}
+      second_partial.delete_if {|r| r[:text][/I'm at/]}
+      unique = false
+      until unique
+        second_tweet = second_partial[r.rand(0..(second_partial.size - 1))]
+        unique = true unless second_tweet == first_tweet
+      end
 
-    user.statements.create(
-        fragment1: random_template[:first],
-        fragment2: first_tweet[:text],
-        fragment3: random_template[:second],
-        fragment4: second_tweet[:text],
-        picture_url: user.profile_image_url,
-        screen_name: user.screen_name,
-        first_tweet: first_tweet[:id],
-        second_tweet: second_tweet[:id]
-    )
+      [first_tweet, second_tweet].each do |tweet|
+        tweet[:text] = tweet[:text].gsub('@', '')
+        tweet[:text] = tweet[:text].gsub(' RT ', '')
+        tweet[:text] = tweet[:text].gsub(' rt ', '')
+        tweet[:text] = tweet[:text].gsub('http', '')
+      end
+
+      user.statements.create(
+          fragment1: random_template[:first],
+          fragment2: first_tweet[:text],
+          fragment3: random_template[:second],
+          fragment4: second_tweet[:text],
+          picture_url: user.profile_image_url,
+          screen_name: user.screen_name,
+          first_tweet: first_tweet[:id],
+          second_tweet: second_tweet[:id]
+      )
+
+    else
+      user.statements.create(
+          fragment1: nil,
+          fragment2: nil,
+          fragment3: nil,
+          fragment4: nil,
+          picture_url: user.profile_image_url,
+          screen_name: user.screen_name,
+          first_tweet: nil,
+          second_tweet: nil
+      )
+    end
   end
 
   def to_s
@@ -192,40 +211,45 @@ class Statement < ActiveRecord::Base
   end
 
   def as_json(*args)
-    tweet1 = Tweet.find(first_tweet)
-    tweet2 = Tweet.find(first_tweet)
 
+    if fragment1 && fragment2 && fragment3 && fragment4
+      tweet1 = Tweet.find(first_tweet)
+      tweet2 = Tweet.find(first_tweet)
+      fragments = [
+          fragment1,
+          fragment2,
+          fragment3,
+          fragment4
+      ]
+      tweets =  [
+          {
+              :url => "https://twitter.com/#{screen_name}/status/#{tweet1.tweet_id_str}",
+              :text => tweet1.text,
+              :location =>
+                  {
+                      :lng => tweet1.longitude,
+                      :lat => tweet1.latitude
+                  }
+          },
+          {
+              :url => "https://twitter.com/#{screen_name}/status/#{tweet2.tweet_id_str}",
+              :text => tweet2.text,
+              :location =>
+                  {
+                      :lng => tweet2.longitude,
+                      :lat => tweet2.latitude,
+                  }
+          }
+      ]
+    else
+      fragments = nil
+      tweets = nil
+    end
     {
         :id => id,
         :date => created_at,
-        :tweets =>
-            [
-                {
-                    :url => "https://twitter.com/#{screen_name}/status/#{tweet1.tweet_id_str}",
-                    :text => tweet1.text,
-                    :location =>
-                        {
-                            :lng => tweet1.longitude,
-                            :lat => tweet1.latitude
-                        }
-                },
-                {
-                    :url => "https://twitter.com/#{screen_name}/status/#{tweet2.tweet_id_str}",
-                    :text => tweet2.text,
-                    :location =>
-                        {
-                            :lng => tweet2.longitude,
-                            :lat => tweet2.latitude,
-                        }
-                }
-            ],
-        :fragments =>
-            [
-                fragment1,
-                fragment2,
-                fragment3,
-                fragment4
-            ],
+        :tweets => tweets,
+        :fragments => fragments,
         :user =>
             {
                 :screen_name => screen_name,
