@@ -211,3 +211,15 @@
 		Slides.getDefinition('EmptySlide', 'empty', props);
 
 
+		props =
+		{
+			animate:function(onComplete)
+			{
+				setTimeout(onComplete, 5000);
+			}
+		}
+		
+		console.log('adding empty slide');
+		Slides.getDefinition('VimeoSlide', 'vimeo', props);
+
+
