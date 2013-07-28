@@ -891,7 +891,8 @@ $pad: $gutterWidth;
 
 		#stmt-3 {
 			@extend .generated-text;
-			margin-bottom: 3 * $pad;		}
+			margin-bottom: 3 * $pad;
+		}
 
 		#handle {
 			@extend .generated-text;
