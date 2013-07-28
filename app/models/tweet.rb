@@ -109,7 +109,7 @@ class Tweet < ActiveRecord::Base
   # Stores the last time an update was attempted in ENV['LAST_UPDATE'], and will pull in
   # new tweets if 5 minutes has passed since last update
   def self.update_tweets(username)
-    #if !ENV['LAST_UPDATE'] || (Time.now > Time.parse(ENV['LAST_UPDATE']) + 45.seconds)
+    if !ENV['LAST_UPDATE'] || (Time.now > Time.parse(ENV['LAST_UPDATE']) + 45.seconds)
       unless TwitterUser.find_by_screen_name(username)
         (1..3).each do |page|
           begin
@@ -119,12 +119,12 @@ class Tweet < ActiveRecord::Base
               Tweet.store_tweet(tweet) unless tweet.retweeted_status
             end
           rescue Twitter::Error::TooManyRequests
-            logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in Tweet::update_tweets'
+            puts 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in Tweet::update_tweets'
           end
         end
       end
-    #  ENV['LAST_UPDATE'] = Time.now.to_s
-    #end
+      ENV['LAST_UPDATE'] = Time.now.to_s
+    end
   end
 
   def self.find_all_with_coordinates(extra_query='')
