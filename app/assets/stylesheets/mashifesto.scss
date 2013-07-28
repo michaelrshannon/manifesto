@@ -38,12 +38,16 @@ $pad: $gutterWidth;
 	@return $columnWidth * $num + $gutterWidth * ($num - 1);
 }
 
+@function calc-push($num) {
+	@return $columnWidth * $num + $gutterWidth * $num;
+}
+
 @mixin columns($num) {
 	width: calc-column($num);
 }
 
 @mixin push($num) {
-	margin-left: $columnWidth * $num + $gutterWidth * $num;
+	margin-left: calc-push($num);
 }
 
 @mixin columns-height($num) {
@@ -291,20 +295,19 @@ $pad: $gutterWidth;
 			@include columns(8);
 			@include columns-height(6);
 			position: absolute;
-			@include push(3);
-			top: - $pad;
+			left: calc-push(9);
+			top: - $pad / 2;
 		}
 
 		#circle {
 			background-image: url(/assets/circlemachine.svg);
-			background-position: 30% 90%;
+			background-size: 100% 100%;
 			background-repeat: no-repeat;
-			background-size: calc-column(2) calc-column(2);
-			@include columns(8);
-			@include columns-height(6);
+			@include columns(2);
+			@include columns-height(2);
 			position: absolute;
-			@include push(3);
-			top: - $pad;
+			left: calc-push(10.5);
+			top: 280px;
 		}
 
 		#block-3 {
