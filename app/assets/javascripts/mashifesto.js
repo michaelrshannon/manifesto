@@ -65,7 +65,11 @@ $(function () {
 	setScale();
 	$(window).resize(setScale);
 
-	var template = 'michael';
-	animate(template);
-	setInterval(function() { animate(template); }, 10000);
+	function pickTemplate() {
+		var index = Math.floor(Math.random()*2);
+		return ['red', 'michael'][index];	
+	}
+	
+	animate(pickTemplate());
+	setInterval(function() { animate(pickTemplate()); }, 10000);
 });
