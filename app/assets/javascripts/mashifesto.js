@@ -37,7 +37,7 @@ $(function () {
 			TweenMax.from('#stmt-0', 1, {top: '-2000px', delay: 0.25});
 			
 			TweenMax.from('#stmt-1', 1, {bottom: '-2000px', delay: 2.25});
-			TweenMax.from('#block-1', 1, {right: '-2000px', delay: 2.5});
+			TweenMax.from('#avatar', 1, {right: '-2000px', delay: 2.5});
 
 			TweenMax.from('#block-2', 1, {left: '3000px', top: '-2000px', delay: 3.25});
 			TweenMax.from('#circle', 1, {left: '2000px', delay: 3.75});
