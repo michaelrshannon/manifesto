@@ -175,7 +175,7 @@ $pad: $gutterWidth;
 		@include columns-height(12);
 		
 		@include transform-origin(50% 50%);
-		@include transform(rotate(-$baseAngle));
+		@include transform(scale(0.9) rotate(-$baseAngle));
 
 		.stmt {
 			text-transform: uppercase;
