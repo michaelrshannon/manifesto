@@ -28,9 +28,14 @@ module HerokuResqueAutoScale
     end
   end
 
-  def self.scale(args = {:min_job_count => 1})
+  def after_perform_scale_down(*args)
+    # Nothing fancy, just shut everything down if we have no jobs
+    Scaler.workers = 0 if Scaler.job_count.zero?
+  end
+
+  def after_enqueue_scale_up(*args)
     unless Rails.env == 'development'
-      Scaler.workers = 0 if Scaler.job_count.zero? && Scaler.job_count < args[:min_job_count]
+      #Scaler.workers = 0 if Scaler.job_count.zero? && Scaler.job_count < args[:min_job_count]
       [
           {
               :workers => 1, # This many workers
