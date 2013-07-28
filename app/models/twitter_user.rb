@@ -13,8 +13,8 @@ class TwitterUser < ActiveRecord::Base
   ###-------------------------------------------------------------------------------
   # Relationships
   ###-------------------------------------------------------------------------------
-  has_many :tweets
-  has_many :statements
+  has_many :tweets, :dependent => :destroy
+  has_many :statements, :dependent => :destroy
 
   ###-------------------------------------------------------------------------------
   # Validations
