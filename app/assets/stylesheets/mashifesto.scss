@@ -147,8 +147,13 @@ $pad: $gutterWidth;
 	width: 100%;
 }
 
+#avatar img {
+	width: 100%;
+	height: auto;
+}
+
 .mashifesto {
-	&.red {
+	.red & {
 		$black: #000;
 		$red: #d2232a;
 		$baseAngle: 35deg;
@@ -266,7 +271,7 @@ $pad: $gutterWidth;
 		}
 	}
 
-	&.michael {
+	.michael & {
 		$black: #000;
 		$red: #d2232a;
 		$blue: #20397c;
@@ -426,7 +431,7 @@ $pad: $gutterWidth;
 
 	}
 
-	&.kevin {
+	.kevin & {
 		$black: #000;
 		$red: #d2232a;
 		$blue: #20397c;
@@ -601,7 +606,7 @@ $pad: $gutterWidth;
 
 	}
 
-	&.ben {
+	.ben & {
 		$black: #000;
 		$red: #d2232a;
 		$blue: #25408F;
@@ -773,7 +778,7 @@ $pad: $gutterWidth;
 
 	}
 
-	&.bryce {
+	.bryce & {
 		$black: #000;
 		$red: #d2232a;
 		$blue: #20397c;
