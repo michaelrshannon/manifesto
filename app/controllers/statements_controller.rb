@@ -25,6 +25,10 @@ class StatementsController < ApplicationController
       respond_to do |format|
         format.json { render json: @statement }
       end
+    else
+      respond_to do |format|
+        format.json { render nothing: true }
+      end
     end
   end
 end

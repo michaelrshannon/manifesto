@@ -7,7 +7,7 @@ class LoadTweets
 
   def self.perform(screen_name)
     user = TwitterUser.find_by_screen_name(screen_name)
-    if user
+    unless user
       Tweet.update_tweets(screen_name)
       user = TwitterUser.find_by_screen_name(screen_name)
       Statement.store_statement(user)
