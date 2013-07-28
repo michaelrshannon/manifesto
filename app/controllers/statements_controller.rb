@@ -9,6 +9,7 @@ class StatementsController < ApplicationController
   end
 
   def show
+    TwitterUser.check_mentions
     session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first
 
     begin

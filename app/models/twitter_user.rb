@@ -4,7 +4,12 @@ class TwitterUser < ActiveRecord::Base
   # Initializers
   ###-------------------------------------------------------------------------------
   attr_accessible :description, :location, :name, :profile_image_url, :protected, :screen_name, :user_id, :user_id_str, :utc_offset
-
+  @@client = Twitter::Client.new(
+      :consumer_key => ENV['TWITTER_CONSUMER_KEY'],
+      :consumer_secret => ENV['TWITTER_CONSUMER_SECRET'],
+      :oauth_token => ENV['TWITTER_OAUTH_TOKEN'],
+      :oauth_token_secret => ENV['TWITTER_TOKEN_SECRET']
+  )
   ###-------------------------------------------------------------------------------
   # Relationships
   ###-------------------------------------------------------------------------------
@@ -32,7 +37,13 @@ class TwitterUser < ActiveRecord::Base
     )
   end
 
-  def create_manifesto
+  def self.check_mentions
+    @@client.mentions_timeline.each do |mention|
+      screen_name = mention.user.screen_name
+      unless TwitterUser.find_by_screen_name(screen_name)
+        Resque.enqueue(LoadTweets, screen_name)
+      end
 
+    end
   end
 end
