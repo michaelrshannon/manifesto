@@ -11,7 +11,7 @@ class StatementsController < ApplicationController
   def show
     TwitterUser.check_mentions
     if Statement.any?
-      session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first
+      session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first || !session[:NEXT_ID]
 
       begin
         raise ActiveRecord::RecordNotFound unless session[:NEXT_ID]
