@@ -82,10 +82,24 @@
 			
 			showVideo:function()
 			{
-				console.log('video');
-				var html = $('#video').html();
-				$('#wrapper').html(html);
-				setTimeout($.proxy(this.onComplete, this), 15 * 1000);
+				// debug
+					console.log('video');
+					
+				// set video
+					var html = $('#video').html();
+					$('#wrapper').html(html);
+					
+				// determine width and height
+					var width	= $(document).width() * 0.7;
+					var height	= width / 16 * 9;
+					
+				// update video size depending on screen size
+					$('iframe')
+						.attr('width', width)
+						.attr('height', height);
+					
+				// set timeout to load next slide
+					setTimeout($.proxy(this.onComplete, this), 15 * 1000);
 			},
 			
 		// -------------------------------------------------------------------------------------
