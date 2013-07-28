@@ -25,9 +25,9 @@
 // -------------------------------------------------------------------------------------
 // DataModel
 		
-	function DataModel()
+	function DataModel(app)
 	{
-		
+		this.getAll();
 	}
 	
 	DataModel.prototype =
@@ -35,32 +35,59 @@
 		// -------------------------------------------------------------------------------------
 		// values
 		
-			json	:null,
+			/** @type {App}	The application  */
+			app				:null,
+		
+			/** @type {String}	server string */
+			//server		:'http://mashifesto-staging.herokuapp.com/',
+			server			:'api/',
 			
-			server	:'api/data.js',
+			/** @type {Array}	Array of Statement objects */
+			statements		:[],
 			
-			
+
 		// -------------------------------------------------------------------------------------
 		// methods
 		
-			getNext:function()
+			getAll:function(onLoad)
 			{
-				this.load('data.js', this.onLoad);
+				var that = this;
+				this.load(this.server + 'statements/all.json', function(data)
+				{
+					for (var i=0; i < data.length; i++)
+					{
+						that.statements.push(new Statement(data[i]));
+					}
+				});
+			},
+		
+			getNext:function(onLoad)
+			{
+				this.load(this.server + 'statement/next.json', onLoad);
 			},
 			
 			load:function(url, onLoad)
 			{
-				jQuery.get(this.server + url, onLoad);
-			},
+				// why isn't the success callback working?
+				// $.getJSON(url, function(data){ console.log(data) } );
+				
+				var that = this;
 
-		// -------------------------------------------------------------------------------------
-		// handlers
-		
-			onLoad:function(data, textStatus, jqXHR)
-			{
-				console.log(data);
+				$.get(url, function(json){
+					
+					// blatant hack, as JSON does not seem to be loading locally
+						json				= json.replace(/[\r\n]/g, '');
+						var data			= JSON.parse(json);
+					
+					// debug
+						console.log(data);
+
+					// call handler
+						onLoad(data);
+					}, 'JSON');
 			},
-		
+			
+
 		// -------------------------------------------------------------------------------------
 		// utilities
 		
@@ -69,47 +96,26 @@
 				return '[object DataModel]';
 			}
 		
-	}
+		}
 	
 
 	// -------------------------------------------------------------------------------------
-	// Statements
-			
-		function Statements(json)
-		{
-			this.json = json;
-		}
-		
-		Statements.prototype =
-		{
-			// -------------------------------------------------------------------------------------
-			// values
-			
-				json:null,
-				
-				
-			// -------------------------------------------------------------------------------------
-			// methods
-			
-				
-	
-			// -------------------------------------------------------------------------------------
-			// utilities
-			
-				toString:function()
-				{
-					return '[object Statements]';
-				}
-			
-		}
-		
-		
-	// -------------------------------------------------------------------------------------
 	// Statement
 			
-		function Statement(json)
+		function Statement(values)
 		{
-			this.json = json;
+			// properties
+				this.id			= values.id;
+				this.date		= new Date(values.date);
+				this.user		= new User(values.user);
+				this.fragments	= values.fragments;
+				if(values.tweets)
+				{
+					for (var i=0; i < values.tweets.length; i++)
+					{
+						this.tweets.push(new Tweet(values.tweets[i]));
+					}
+				}
 		}
 		
 		Statement.prototype =
@@ -117,7 +123,11 @@
 			// -------------------------------------------------------------------------------------
 			// values
 			
-				json:null,
+				id				:null,
+				date			:null,
+				user			:null,
+				tweets			:[],
+				fragments		:[],
 				
 				
 			// -------------------------------------------------------------------------------------
@@ -137,43 +147,16 @@
 		
 		
 	// -------------------------------------------------------------------------------------
-	// Fragment
-			
-		function Fragment(json)
-		{
-			this.json = json;
-		}
-		
-		Fragment.prototype =
-		{
-			// -------------------------------------------------------------------------------------
-			// values
-			
-				json:null,
-				
-				
-			// -------------------------------------------------------------------------------------
-			// methods
-			
-				
-	
-			// -------------------------------------------------------------------------------------
-			// utilities
-			
-				toString:function()
-				{
-					return '[object Fragment]';
-				}
-			
-		}
-		
-		
-	// -------------------------------------------------------------------------------------
 	// Tweet
 			
-		function Tweet(json)
+		function Tweet(tweet)
 		{
-			this.json = json;
+			if(tweet)
+			{
+				this.url		= tweet.url;
+				this.text		= tweet.text;
+				this.location	= new Location(tweet.location);
+			}
 		}
 		
 		Tweet.prototype =
@@ -181,14 +164,11 @@
 			// -------------------------------------------------------------------------------------
 			// values
 			
-				json:null,
+				url			:'',
+				text		:'',
+				location	:null,
 				
 				
-			// -------------------------------------------------------------------------------------
-			// methods
-			
-				
-	
 			// -------------------------------------------------------------------------------------
 			// utilities
 			
@@ -203,9 +183,14 @@
 	// -------------------------------------------------------------------------------------
 	// User
 			
-		function User(json)
+		function User(user)
 		{
-			this.json = json;
+			if(user)
+			{
+				this.screenName	= user.screen_name;
+				this.image		= user.image;
+				this.name		= user.name;
+			}
 		}
 		
 		User.prototype =
@@ -213,20 +198,48 @@
 			// -------------------------------------------------------------------------------------
 			// values
 			
-				json:null,
+				screenName	:'',
+				image		:'',
+				name		:'',
 				
-				
-			// -------------------------------------------------------------------------------------
-			// methods
-			
-				
-	
 			// -------------------------------------------------------------------------------------
 			// utilities
 			
 				toString:function()
 				{
-					return '[object User]';
+					return '<a href="http://www.twitter.com/' +this.name+ '">' +this.screenName+ '</a>';
+				}
+			
+		}
+
+
+	// -------------------------------------------------------------------------------------
+	// User
+			
+		function Location(location)
+		{
+			if(location)
+			{
+				this.lng		= location.lng || 0;
+				this.lat		= location.lat || 0;
+			}
+		}
+		
+		Location.prototype =
+		{
+			// -------------------------------------------------------------------------------------
+			// values
+			
+				lng			:0,
+				lat			:0,
+				
+				
+			// -------------------------------------------------------------------------------------
+			// utilities
+			
+				toString:function()
+				{
+					return 'lng:' +this.lng+ ', lat:' + this.lat;
 				}
 			
 		}

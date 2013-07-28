@@ -1,7 +1,6 @@
 {
 	"id":1,
-	"created_date":"2013-07-27T16:32:28Z",
-	"updated_date":"",
+	"date":"2013-07-27T16:32:28Z",
 	"tweets":
 	[
 		{
