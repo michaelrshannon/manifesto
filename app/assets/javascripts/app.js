@@ -81,10 +81,12 @@
 			onNext:function(data)
 			{
 				// create a new Statement instance
-					var statement = new Statement(data);
+					var statement	= new Statement(data);
 					
 				// create a new slide object (slides control their own HTML creation and injection)
-					var slide = Slide.factory('#wrapper', statement);
+					var slide		= statement.fragments
+										? Slides.getNext('#wrapper', statement)
+										: new EmptySlide('#wrapper', statement);
 					
 				// debug
 					console.log(slide);
