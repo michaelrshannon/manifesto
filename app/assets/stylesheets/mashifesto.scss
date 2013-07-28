@@ -88,6 +88,7 @@ body {
 	background-size: cover;
 	height: 100%;
 	overflow: hidden;
+	color: #000;
 }
 
 @mixin transform-origin ($value) {
@@ -621,7 +622,7 @@ $pad: $gutterWidth;
 		@include columns-height(12);
 		
 		@include transform-origin(50% 50%);
-		@include transform(scale(0.8) rotate(-$baseAngle) translate(-127px, -187px)); // We zoom this out a little bit more
+		@include transform(scale(0.9) rotate(-$baseAngle) translate(-127px, -187px)); // We zoom this out a little bit more
 
 		.stmt {
 			text-transform: uppercase;
@@ -712,6 +713,10 @@ $pad: $gutterWidth;
 			@include columns-height(3);
 			margin-bottom: $pad / 2;
 			float: left;
+
+			@include animation(0s, 4s, rotate);
+			@include animation-timing-function(linear);
+			@include animation-iteration-count(infinite);
 		}
 
 		#avatar {
