@@ -47,7 +47,7 @@ class TwitterUser < ActiveRecord::Base
           end
         end
       rescue Twitter::Error::TooManyRequests
-        puts 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in TwitterUser::check_mentions'
+        logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in TwitterUser::check_mentions'
       end
       ENV['LAST_UPDATE'] = Time.now.to_s
     end

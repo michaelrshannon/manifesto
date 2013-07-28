@@ -118,7 +118,7 @@ class Tweet < ActiveRecord::Base
             Tweet.store_tweet(tweet) unless tweet.retweeted_status
           end
         rescue Twitter::Error::TooManyRequests
-          puts 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in Tweet::update_tweets'
+          logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in Tweet::update_tweets'
         end
       end
     end
