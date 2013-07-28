@@ -3,7 +3,11 @@
 		
 	function DataModel(app)
 	{
-		//this.getAll();
+		this.server = location.protocol === 'file:'
+						? 'api/'
+						: 'http://staging.mashifesto.org/';
+						// 'http://mashifesto-staging.herokuapp.com/'
+		
 	}
 	
 	DataModel.prototype =
@@ -11,16 +15,14 @@
 		// -------------------------------------------------------------------------------------
 		// values
 		
-			/** @type {App}	The application  */
-			app				:null,
+			/** @type {App}		The application  */
+			app					:null,
 		
 			/** @type {String}	server string */
-      server		:'http://staging.mashifesto.org/',
-			//server		:'http://mashifesto-staging.herokuapp.com/',
-			//server			:'api/',
+			server				:'',
 			
-			/** @type {Array}	Array of Statement objects */
-			statements		:[],
+			/** @type {Array}	Array of data objects */
+			data				:[],
 			
 
 		// -------------------------------------------------------------------------------------
@@ -40,8 +42,34 @@
 		
 			getNext:function(onLoad)
 			{
-				// need to add code here to randomise if we reach the end
-				this.load(this.server + 'statement/next.json', onLoad);
+				// temp variable
+					var that = this;
+					
+				// temp callback
+					function fn(data)
+					{
+						// check the last 
+							var last = that.getLast();
+							
+						// if the same data is being returned, return a random cached bit of data
+							if(last && data.id == last.id)
+							{
+								console.log('No next statement!');
+								data = that.getRandom();
+							}
+						
+						// otherwise, add the new data to the cache
+							else
+							{
+								that.data.push(data);
+							}
+						
+						// load
+							onLoad(data);
+					}
+				
+				// call load
+					this.load(this.server + 'statement/next.json', fn);
 			},
 			
 			load:function(url, onLoad)
@@ -49,31 +77,54 @@
 				// why isn't the success callback working?
 				// $.getJSON(url, function(data){ console.log(data) } );
 				
-				var that = this;
-
-				$.get(url, function(json){
-
-            var data;
-
-					// blatant hack, as JSON does not seem to be loading locally
-            if(typeof json === 'string')
-            {
-              json				= json.replace(/[\r\n]/g, '');
-              data			  = JSON.parse(json);
-            }
-          else
-          {
-            data = json;
-          }
-
-					// debug
-						//console.log(data);
-
-					// call handler
-						onLoad(data);
-					}, 'JSON');
+				// variables
+					var that = this;
+	
+				// load data
+					$.get(url, function(json){
+						
+						// grab data
+							var data = json;
+	
+						// blatant hack, as JSON does not seem to be loading locally
+							if(typeof json === 'string')
+							{
+								json	= json.replace(/[\r\n]/g, '');
+								data	= JSON.parse(json);
+							}
+	
+						// debug
+							//console.log(data);
+	
+						// call handler
+							onLoad(data);
+						}, 'JSON');
 			},
 			
+			find:function(id)
+			{
+				var data;
+				for (var i = 0; i < this.data.length; i++)
+				{
+					data = this.data[i];
+					if(data.id == id)
+					{
+						return data[i];
+					}
+				}
+				return null;
+			},
+			
+			getLast:function()
+			{
+				return this.data[this.data.length - 1];
+			},
+			
+			getRandom:function()
+			{
+				var index = Math.floor(Math.random() * this.data.length);
+				return this.data[index];
+			},
 
 		// -------------------------------------------------------------------------------------
 		// utilities

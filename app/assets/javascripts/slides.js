@@ -6,7 +6,7 @@
 		(function(){
 			
 			// Slide defintions
-				var slideDefs = [ ];
+				Slide.definitions = [ ];
 				
 				/**
 				 * Returns a new slide instance. Use this to get a different kind than before
@@ -19,9 +19,11 @@
 				 */
 				Slide.factory = function(container, statement)
 				{
-					// resolve slideclass
-						var def		= slideDefs[0];
-						slideDefs	= slideDefs.concat(slideDefs.shift())
+					// grabb the first slide defintion
+						var def		= Slide.definitions[0];
+						
+					// rotate the remaining slide defintions
+						Slide.definitions	= Slide.definitions.concat(Slide.definitions.shift())
 					
 					// return new instance
 						return new def(container, statement);
@@ -53,7 +55,7 @@
 						_.extend(def.prototype, props);
 					
 					// register definition
-						slideDefs.push(def);
+						Slide.definitions.push(def);
 				}
 	
 		})();
