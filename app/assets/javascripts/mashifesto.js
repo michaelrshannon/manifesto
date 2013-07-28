@@ -115,6 +115,27 @@ $(function () {
 
 			TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9});
 
+		} else if(templateName === 'empty') {
+
+			TweenMax.to('.mashifesto', 0, {top: '0px', left: '0px'});
+			
+			TweenMax.from('#block-0', 1, {left: '-2000px'});
+			TweenMax.from('#stmt-0', 1, {left: '-2000px', delay: 0.25});
+			
+			TweenMax.from('#stmt-1', 1, {bottom: '-2000px', delay: 2.25});
+			TweenMax.from('#stmt-1b', 1, {bottom: '-2000px', delay: 2.5});
+
+			TweenMax.from('#hand', 1, {top: '-2000px', delay: 2.5});
+			TweenMax.from('#block-3', 1, {top: '2000px', delay: 3.5});
+
+			TweenMax.from('#stmt-2', 1, {right: '-2000px', delay: 4});
+			TweenMax.from('#stmt-3', 1, {right: '-2000px', delay: 4.25});
+
+			TweenMax.from('#handle', 1, {top: '2000px', delay: 4.75});
+			TweenMax.from('#mashifesto-handle', 1, {top: '2000px', delay: 5});
+
+			TweenMax.to('.mashifesto', 2, {top: '-2456px', left: '-1721px', delay: 9});
+
 		}
 	}
 
