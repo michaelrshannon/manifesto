@@ -82,28 +82,9 @@ class Tweet < ActiveRecord::Base
           :tweet_id => t.id,
           :tweet_id_str => t.id.to_s,
           :latitude => latitude,
-          :longitude => longitude,
-          :weather => get_weather(latitude, longitude, t.created_at)
+          :longitude => longitude
       )
     end
-  end
-
-  def valid_weather?
-    (weather_icon && temperature && weather_summary) ? true : false
-  end
-
-  def weather_icon
-    valid_icons = ['clear-day', 'clear-night', 'rain', 'snow', 'sleet', 'wind', 'fog', 'cloudy', 'partly-cloudy-day', 'partly-cloudy-night', 'default']
-    icon = weather_by_tweet_hour ? weather_by_tweet_hour['icon'] : 'default'
-    valid_icons.include?(icon) ? icon : 'default'
-  end
-
-  def temperature
-    weather_by_tweet_hour['temperature'] if weather_by_tweet_hour
-  end
-
-  def weather_summary
-    weather_by_tweet_hour['summary'] if weather_by_tweet_hour
   end
 
   # Stores the last time an update was attempted in ENV['LAST_UPDATE'], and will pull in

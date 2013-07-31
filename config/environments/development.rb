@@ -35,6 +35,9 @@ Manifesto::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  # Mashifesto specific configuration
+  Manifesto::Application.config.url_root = 'http://localhost:3000'
+
   # Loads app config from /config/env_vars.yml
   require 'yaml'
   rails_root = Rails.root || File.dirname(__FILE__) + '/../..'

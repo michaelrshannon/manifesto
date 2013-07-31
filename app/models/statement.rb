@@ -127,6 +127,14 @@ class Statement < ActiveRecord::Base
       'We will crush' =>
           [ 'those' ]
   }
+
+  @@client = Twitter::Client.new(
+    :consumer_key => ENV['TWITTER_CONSUMER_KEY'],
+    :consumer_secret => ENV['TWITTER_CONSUMER_SECRET'],
+    :oauth_token => ENV['TWITTER_OAUTH_TOKEN'],
+    :oauth_token_secret => ENV['TWITTER_TOKEN_SECRET']
+  )
+
   ###-------------------------------------------------------------------------------
   # Relationships
   ###-------------------------------------------------------------------------------
@@ -250,6 +258,7 @@ class Statement < ActiveRecord::Base
         :date => created_at,
         :tweets => tweets,
         :fragments => fragments,
+        :url => to_url,
         :user =>
             {
                 :screen_name => screen_name,
@@ -263,6 +272,14 @@ class Statement < ActiveRecord::Base
     (0..40).each do |i|
       Statement.store_statement(user)
     end
+  end
+
+  def to_url
+    "#{Rails.configuration.url_root}/#{id}/#{screen_name}"
+  end
+
+  def send_to_user
+    @@client.update("@#{screen_name} Here's your Mashifesto! #{to_url}")
   end
 end
 
