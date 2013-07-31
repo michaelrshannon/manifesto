@@ -9,7 +9,9 @@ class LoadTweets
     Tweet.update_tweets(screen_name)
     user = TwitterUser.find_by_screen_name(screen_name)
     statement = Statement.store_statement(user)
-    if Rails.env.production?
+
+    # Allow tweets from staging for now as there is no "production"
+    if Rails.env.production? || Rails.env.staging?
       statement.send_to_user
     end
   end
