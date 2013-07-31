@@ -99,7 +99,7 @@
 						.attr('width', width)
 						.attr('height', height);
 
-        $('#wrapper, #content').attr('style', 'height:100%')
+					$('#wrapper, #content').attr('style', 'height:100%')
 					
 				// set timeout to load next slide
 					setTimeout($.proxy(this.onComplete, this), 10 * 1000);
@@ -127,6 +127,8 @@
 					
 				// tell the slide to animate
 					slide.animate($.proxy(this.onComplete, this));
+				// make sure the scaling is set correctly
+					$(window).trigger('resize')
 			},
 			
 			/**
