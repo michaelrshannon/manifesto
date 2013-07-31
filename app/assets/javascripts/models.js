@@ -5,9 +5,7 @@
 	{
 		this.server = location.protocol === 'file:'
 						? 'api/'
-						: 'http://localhost:3000/';
-						// 'http://mashifesto-staging.herokuapp.com/'
-		
+						: '/';		
 	}
 	
 	DataModel.prototype =
