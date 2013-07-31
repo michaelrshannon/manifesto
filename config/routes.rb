@@ -19,6 +19,8 @@ Manifesto::Application.routes.draw do
   get 'statements' => 'statements#index', :as => :statements
   get 'statement/next' => 'statements#show', :constraints => {:format => /(json)/}, :position => :next, :as => :next_statement
   get 'statement/first' => 'statements#show', :constraints => {:format => /(json)/}, :position => :first, :as => :first_statement
+  get 'statement/:id' => 'statements#show', :constraints => {:format => /(json)/}, :position => :static, :as => :static_statement
+  get ':id/:name' => 'home#index', :as => :show_statement
   root :to => 'home#index'
 
 end

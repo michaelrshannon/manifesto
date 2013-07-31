@@ -13,13 +13,20 @@ class StatementsController < ApplicationController
     if Statement.any?
       session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first || !session[:NEXT_ID]
 
-      begin
-        raise ActiveRecord::RecordNotFound unless session[:NEXT_ID]
-        session[:NEXT_ID] = session[:NEXT_ID] + 1
-        @statement = Statement.find(session[:NEXT_ID])
-      rescue ActiveRecord::RecordNotFound
-        @statement = Statement.last
-        session[:NEXT_ID] = @statement.id
+      if params[:id]
+        #begin
+        @statement = Statement.find(params[:id])
+      end
+
+      if @statement.nil?
+        begin
+          raise ActiveRecord::RecordNotFound unless session[:NEXT_ID]
+          session[:NEXT_ID] = session[:NEXT_ID] + 1
+          @statement = Statement.find(session[:NEXT_ID])
+        rescue ActiveRecord::RecordNotFound
+          @statement = Statement.last
+          session[:NEXT_ID] = @statement.id
+        end
       end
 
       respond_to do |format|

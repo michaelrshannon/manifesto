@@ -12,6 +12,9 @@
 			
 			/** @type {Number}		The max number of slides to play between video */
 			maxCount				:5,
+
+			/** @type {Number}		The ID of the statement to display, if we're only showing one. */
+			staticStatementId : 0,
 			
 		
 		// -------------------------------------------------------------------------------------
@@ -21,7 +24,7 @@
 			 * Main initialalization function
 			 * Sets up document, template stettings, etc
 			 */
-			initialize:function()
+			initialize:function(staticStatementId)
 			{
 				// debug
 					console.log('init');
@@ -52,6 +55,8 @@
 					$(window)
 						.resize(setScale)
 						.trigger('resize');
+
+					this.staticStatementId = staticStatementId;
 			},
 			
 		// -------------------------------------------------------------------------------------
@@ -75,9 +80,11 @@
 			getNext:function()
 			{
 				console.log('next slide');
-				this.count % this.maxCount == 0
+				// We don't show the video when displaying a 
+				// specific statement.
+				this.count % this.maxCount == 0 && !this.staticStatementId
 					? this.showVideo()
-					: this.model.getNext($.proxy(this.onNext, this));
+					: this.model.getNext(this.staticStatementId, $.proxy(this.onNext, this));
 			},
 			
 			showVideo:function()
@@ -144,7 +151,7 @@
 	}
 	
 	$(function(){
-		App.initialize();
+		App.initialize(window.staticStatementId || 0);
 		App.start();
 		});
 	

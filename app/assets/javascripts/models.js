@@ -39,7 +39,7 @@
 				});
 			},
 		
-			getNext:function(onLoad)
+			getNext:function(staticStatementId, onLoad)
 			{
 				// temp variable
 					var that = this;
@@ -68,7 +68,14 @@
 					}
 				
 				// call load
-					this.load(this.server + 'statement/next.json', fn);
+					var url;
+					if(staticStatementId) {
+						url = this.server + 'statement/'+ staticStatementId +'.json';
+					} else {
+						url = this.server + 'statement/next.json';
+					}
+
+					this.load(url, fn);
 			},
 			
 			load:function(url, onLoad)
