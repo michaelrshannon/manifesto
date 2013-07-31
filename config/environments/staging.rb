@@ -64,4 +64,9 @@ Manifesto::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  # Mashifesto specific configuration
+  # If you're changing this then you might want to stop sending tweets from
+  # staging too. Have a look at uses of send_to_user.
+  Manifesto::Application.config.url_root = 'http://www.mashifesto.org'
 end
