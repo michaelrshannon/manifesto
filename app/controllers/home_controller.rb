@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   
   def index
-    session[:NEXT_ID] = nil
+    session[:LATEST_ID] = Statement.last.id
     respond_to do |format|
       format.html # show.html.erb
       format.js

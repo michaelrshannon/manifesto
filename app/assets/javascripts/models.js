@@ -19,54 +19,13 @@
 			/** @type {String}	server string */
 			server				:'',
 			
-			/** @type {Array}	Array of data objects */
-			data				:[],
-			
 			
 
 		// -------------------------------------------------------------------------------------
 		// methods
 		
-			getAll:function(onLoad)
-			{
-				var that = this;
-				this.load(this.server + 'statements/all.json', function(data)
-				{
-					for (var i=0; i < data.length; i++)
-					{
-						that.statements.push(new Statement(data[i]));
-					}
-				});
-			},
-		
 			getNext:function(staticStatementId, onLoad)
 			{
-				// temp variable
-					var that = this;
-					
-				// temp callback
-					function fn(data)
-					{
-						// check the last 
-							var last = that.getLast();
-							
-						// if the same data is being returned, return a random cached bit of data
-							if(last && data.id == last.id)
-							{
-								console.log('No next statement!');
-								data = that.getRandom();
-							}
-						
-						// otherwise, add the new data to the cache
-							else
-							{
-								that.data.push(data);
-							}
-						
-						// load
-							onLoad(data);
-					}
-				
 				// call load
 					var url;
 					if(staticStatementId) {
@@ -75,7 +34,7 @@
 						url = this.server + 'statement/next.json';
 					}
 
-					this.load(url, fn);
+					this.load(url, onLoad);
 			},
 			
 			load:function(url, onLoad)
@@ -107,31 +66,7 @@
 						}, 'JSON');
 			},
 			
-			find:function(id)
-			{
-				var data;
-				for (var i = 0; i < this.data.length; i++)
-				{
-					data = this.data[i];
-					if(data.id == id)
-					{
-						return data[i];
-					}
-				}
-				return null;
-			},
 			
-			getLast:function()
-			{
-				return this.data[this.data.length - 1];
-			},
-			
-			getRandom:function()
-			{
-				var index = Math.floor(Math.random() * this.data.length);
-				return this.data[index];
-			},
-
 		// -------------------------------------------------------------------------------------
 		// utilities
 		

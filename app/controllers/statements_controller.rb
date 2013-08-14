@@ -11,8 +11,6 @@ class StatementsController < ApplicationController
   def show
     TwitterUser.check_mentions
     if Statement.any?
-      session[:NEXT_ID] = Statement.first.id - 1 if params[:position] == :first || !session[:NEXT_ID]
-
       if params[:id]
         #begin
         @statement = Statement.find(params[:id])
@@ -20,12 +18,17 @@ class StatementsController < ApplicationController
 
       if @statement.nil?
         begin
-          raise ActiveRecord::RecordNotFound unless session[:NEXT_ID]
-          session[:NEXT_ID] = session[:NEXT_ID] + 1
-          @statement = Statement.find(session[:NEXT_ID])
+          raise ActiveRecord::RecordNotFound unless session[:LATEST_ID]
+          if session[:LATEST_ID] == Statement.last.id
+            @statement = Statement.first(:order => "RANDOM()")
+            # We don't touch LATEST_ID in this case
+          else
+            session[:LATEST_ID] = session[:LATEST_ID] + 1
+            @statement = Statement.find(session[:LATEST_ID])
+          end
         rescue ActiveRecord::RecordNotFound
           @statement = Statement.last
-          session[:NEXT_ID] = @statement.id
+          session[:LATEST_ID] = @statement.id
         end
       end
 
