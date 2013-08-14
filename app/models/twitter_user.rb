@@ -49,6 +49,8 @@ class TwitterUser < ActiveRecord::Base
         end
       rescue Twitter::Error::TooManyRequests
         logger.debug 'TWITTER EXCEPTION RESCUED :: API Rate limit exceeded in TwitterUser::check_mentions'
+      rescue ActiveRecord::StatementInvalid => e
+        logger.debug "ACTIVE RECORD EXCEPTION RESCUED :: Could be that we\'ve hit a DB limit on Heroku :: #{e.message}"
       end
       ENV['LAST_UPDATE'] = Time.now.to_s
     end
