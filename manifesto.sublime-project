@@ -1,0 +1,17 @@
+{
+  "folders":
+  [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "tab_size": 2,
+    "use_tab_stops": true,
+    "detect_indentation": true,
+    "auto_indent": true,
+    "trim_automatic_white_space": true,
+    "indent_subsequent_lines": true,
+    "default_line_ending": "unix"
+  }
+}
