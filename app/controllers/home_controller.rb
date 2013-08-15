@@ -2,6 +2,11 @@ class HomeController < ApplicationController
   
   def index
     session[:LATEST_ID] = Statement.last.id
+
+    if params[:id]
+      @statement = Statement.find(params[:id])
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.js

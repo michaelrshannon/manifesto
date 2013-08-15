@@ -206,3 +206,13 @@
 	  </tr>
   </table>
 </script>
+
+<% if not @statement.nil? %>
+  <% content_for :head do %>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mashfesto">
+    <meta name="twitter:creator" content="@<%= @statement.screen_name %>">
+    <meta name="twitter:title" content="@<%= @statement.screen_name %>'s mashifesto">
+    <meta name="twitter:description" content="&quot;<%= @statement %>&quot;">
+  <% end %>
+<% end %>
