@@ -28,7 +28,7 @@ Then type `vagrant ssh` to connect to the box via SSH. If that doesn't work you 
 - `bundle install` - this will use a package manager to download all the libraries that we use.
 - `rake db:setup` - this will create the database and all the tables and columns.
 - `rails server` - this will start up the Rails server and make the website available at http://localhost:3000.
-- Resque is needed if you want to start populating your database with tweets and mashifestos. You'll need to open another command line window, `vagrant ssh` into the box and run the command below.
+- Resque is needed if you want to start populating your database with tweets and mashifestos. You'll need to open another command line window, `vagrant ssh` into the box and run the command below. You may have to refresh the page a few times before mashifestos start showing up properly.
 
 To stop the Rails server simply type Ctrl+C.
 

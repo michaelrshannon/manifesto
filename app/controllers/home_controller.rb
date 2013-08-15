@@ -1,7 +1,10 @@
 class HomeController < ApplicationController
   
   def index
-    session[:LATEST_ID] = Statement.last.id
+    last = Statement.last
+    if not last.nil?
+      session[:LATEST_ID] = last.id
+    end
 
     if params[:id]
       @statement = Statement.find(params[:id])
