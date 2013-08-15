@@ -222,7 +222,7 @@ class Statement < ActiveRecord::Base
 
     if fragment1 && fragment2 && fragment3 && fragment4
       tweet1 = Tweet.find(first_tweet)
-      tweet2 = Tweet.find(first_tweet)
+      tweet2 = Tweet.find(second_tweet)
       fragments = [
           fragment1,
           fragment2,
