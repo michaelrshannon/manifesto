@@ -214,5 +214,11 @@
     <meta name="twitter:creator" content="@<%= @statement.screen_name %>">
     <meta name="twitter:title" content="@<%= @statement.screen_name %>'s mashifesto">
     <meta name="twitter:description" content="&quot;<%= @statement %>&quot;">
+
+    <meta property="og:title" content="@<%= @statement.screen_name %>'s mashifesto" />
+    <meta property="og:description" content="&quot;<%= @statement %>&quot; - Tweet 'hello' @mashifesto and we'll generate a mashifesto for you." />
+    <meta property="og:image" content="http://www.mashifesto.org/assets/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= @statement.to_url %>" />
   <% end %>
 <% end %>
