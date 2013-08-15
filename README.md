@@ -1,4 +1,3 @@
-
 ## Running in a VM
 
 In my (Alasdair's) opinion the easiest way to get this up and running on Windows is to use a Vagrant VM. You'll need to install:
@@ -8,17 +7,17 @@ In my (Alasdair's) opinion the easiest way to get this up and running on Windows
 
 You'll also need to create a file called `database.yml` in the `config` directory. This should have the following contents:
 
-  development:
-    adapter: postgresql
-    encoding: unicode
-    database: manifesto_development
-    pool: 5
-    username: vagrant
-    password: 
+    development:
+      adapter: postgresql
+      encoding: unicode
+      database: manifesto_development
+      pool: 5
+      username: vagrant
+      password: 
 
 Once that's all ready you can open a Windows command prompt in the root directory of this repository. Then run
 
-  vagrant up
+    vagrant up
 
 This will download & import a VM image that has all the necessary software installed.
 
