@@ -215,7 +215,7 @@ class Statement < ActiveRecord::Base
   end
 
   def to_s
-    "#{fragment1} #{fragment2} #{fragment3} #{fragment4}"
+    "#{fragment1} #{Obscenity.sanitize(fragment2)} #{fragment3} #{Obscenity.sanitize(fragment4)}"
   end
 
   def as_json(*args)
@@ -225,9 +225,9 @@ class Statement < ActiveRecord::Base
       tweet2 = Tweet.find(second_tweet)
       fragments = [
           fragment1,
-          fragment2,
+          Obscenity.sanitize(fragment2),
           fragment3,
-          fragment4
+          Obscenity.sanitize(fragment4)
       ]
       tweets =  [
           {

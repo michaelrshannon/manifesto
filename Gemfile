@@ -14,6 +14,8 @@ gem 'newrelic_rpm'
 gem 'resque'
 gem 'heroku-api'
 
+gem 'obscenity'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
