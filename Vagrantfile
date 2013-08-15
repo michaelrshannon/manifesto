@@ -22,7 +22,7 @@ def box_url(box_name)
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "schmoo"
+  config.vm.box = "schmoo64"
   config.vm.box_url = box_url(config.vm.box)
   
   config.vm.network :forwarded_port, guest: 3000, host: 3000
