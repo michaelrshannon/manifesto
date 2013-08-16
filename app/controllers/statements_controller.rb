@@ -2,7 +2,7 @@ class StatementsController < ApplicationController
   # GET /tweets
   # GET /tweets.json
   def index
-    @statements = Statement.all
+    @statements = Statement.includes([:first_tweet_model, :second_tweet_model]).all
     respond_to do |format|
       format.json { render json: @statements }
     end

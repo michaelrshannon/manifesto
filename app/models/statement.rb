@@ -1,6 +1,9 @@
 class Statement < ActiveRecord::Base
   attr_accessible :first_tweet, :fragment1, :fragment2, :fragment3, :fragment4, :picture_url, :screen_name, :second_tweet, :mention_id
 
+  belongs_to :first_tweet_model, :class_name => "Tweet", :foreign_key => "first_tweet", :include => [:twitter_user]
+  belongs_to :second_tweet_model, :class_name => "Tweet", :foreign_key => "second_tweet", :include => [:twitter_user]
+
   ###-------------------------------------------------------------------------------
   # Initializers
   ###-------------------------------------------------------------------------------
@@ -223,8 +226,8 @@ class Statement < ActiveRecord::Base
   def as_json(*args)
 
     if fragment1 && fragment2 && fragment3 && fragment4
-      tweet1 = Tweet.find(first_tweet)
-      tweet2 = Tweet.find(second_tweet)
+      tweet1 = first_tweet_model
+      tweet2 = second_tweet_model
       fragments = [
           fragment1,
           Obscenity.sanitize(fragment2),
@@ -264,7 +267,7 @@ class Statement < ActiveRecord::Base
         :user =>
             {
                 :screen_name => screen_name,
-                :name => TwitterUser.find_by_screen_name(screen_name).name,
+                :name => tweet1.twitter_user.name,
                 :image => picture_url,
             }
     }
