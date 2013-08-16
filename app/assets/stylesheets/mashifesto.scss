@@ -212,6 +212,7 @@ body:not(.video) #wrapper {
 
 			span {
 				line-height: $lineHeight;
+				display: block;
 			}
 		}
 
@@ -334,6 +335,7 @@ body:not(.video) #wrapper {
 			
 			span {
 				line-height: $lineHeight;
+				display: block;
 			}
 		}
 
@@ -497,6 +499,11 @@ body:not(.video) #wrapper {
 			font-family: 'raleway';
 			font-size: 1.1 * $fontSize;
 			line-height: 1.3 * $lineHeight;
+
+			span {
+				line-height: 1.1 * $lineHeight;
+				display: block;
+			}
 		}
 
 		.static-text {
@@ -538,7 +545,10 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			left: calc-column(6) - $pad / 4; // A little extra padding
 			width: calc-column(6);
-			height: 4em;
+			
+			span {
+				height: 4.5em;
+			}
 		}
 
 		#left-block {
@@ -676,6 +686,11 @@ body:not(.video) #wrapper {
 			line-height: 1.1 * $lineHeight;
 			opacity: $redOpacity;
 			color: $red;
+
+			span {
+				line-height: 1.1 * $lineHeight;
+				display: block;
+			}
 		}
 
 		.static-text {
@@ -850,6 +865,11 @@ body:not(.video) #wrapper {
 			line-height: $lineHeight;
 			opacity: $redOpacity;
 			color: $red;
+
+			span {
+				line-height: 1.1 * $lineHeight;
+				display: block;
+			}
 		}
 
 		.stmt, .block, #handle, #mashifesto-handle {
