@@ -41,7 +41,7 @@ class TwitterUser < ActiveRecord::Base
     if !ENV['LAST_UPDATE'] || (Time.now > Time.parse(ENV['LAST_UPDATE']) + 45.seconds)
       begin
         @@client.mentions_timeline.each do |mention|
-          unless Mention.find_by_mention_id(mention.id)
+          unless Mention.find_by_mention_id(mention.id) || mention.user.screen_name == 'mashifesto'
             our_mention = Mention.build_from_api(mention)
             Resque.enqueue(LoadTweets, our_mention)
           end
