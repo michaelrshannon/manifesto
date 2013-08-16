@@ -258,10 +258,10 @@ class Statement < ActiveRecord::Base
       fragments = nil
       tweets = nil
     end
-    
+
     user = nil
     if tweet1.nil?
-      TwitterUser.find_by_screen_name(screen_name)
+      user = TwitterUser.find_by_screen_name(screen_name)
     else
       user = tweet1.twitter_user
 
