@@ -264,6 +264,7 @@ class Statement < ActiveRecord::Base
       user = TwitterUser.find_by_screen_name(screen_name)
     else
       user = tweet1.twitter_user
+    end
 
     {
         :id => id,
