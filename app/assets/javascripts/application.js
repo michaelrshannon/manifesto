@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.textfill
 //= require underscore
-//= require zepto
 //= require TweenMax.min
 //= require models
 //= require slides

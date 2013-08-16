@@ -167,7 +167,6 @@ body:not(.video) #wrapper {
 
 		position: relative;
 		font-size: $fontSize;
-		line-height: $lineHeight;
 		margin-left: auto;
 		margin-right: auto;
 		
@@ -210,6 +209,10 @@ body:not(.video) #wrapper {
 			font-size: 1.2 * $fontSize;
 			line-height: $lineHeight;
 			opacity: $redOpacity;
+
+			span {
+				line-height: $lineHeight;
+			}
 		}
 
 		.stmt, .block, #handle {
@@ -239,6 +242,7 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			@include columns-left(6);
 			width: 6em;
+			height: 4em;
 		}
 
 		#block-1 {
@@ -267,6 +271,7 @@ body:not(.video) #wrapper {
 		#stmt-3 {
 			@extend .generated-text;
 			margin-bottom: $pad;
+			height: 4em;
 		}
 
 		#handle {
@@ -326,6 +331,10 @@ body:not(.video) #wrapper {
 			font-family: 'molotregular';
 			font-size: 1.2 * $fontSize;
 			line-height: $lineHeight;
+			
+			span {
+				line-height: $lineHeight;
+			}
 		}
 
 		.stmt, .block, #handle, #mashifesto-handle {
@@ -357,6 +366,7 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			left: calc-column(6) - $pad / 4; // A little extra padding
 			width: 6em;
+			height: 4em;
 		}
 
 		#avatar {
@@ -416,6 +426,7 @@ body:not(.video) #wrapper {
 			margin-bottom: 3 * $pad;
 			opacity: $redOpacity;
 			color: $red;
+			height: 4em;
 		}
 
 		#handle {
@@ -527,6 +538,7 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			left: calc-column(6) - $pad / 4; // A little extra padding
 			width: calc-column(6);
+			height: 4em;
 		}
 
 		#left-block {
@@ -591,6 +603,7 @@ body:not(.video) #wrapper {
 			opacity: $redOpacity;
 			color: $red;
 			@include columns(8);
+			height: 4em;
 		}
 
 		#handle {
@@ -713,6 +726,7 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			left: calc-column(6) - $pad / 4; // A little extra padding
 			width: calc-column(6);
+			height: 4em;
 		}
 
 		#circle {
@@ -760,6 +774,7 @@ body:not(.video) #wrapper {
 			opacity: $redOpacity;
 			color: $red;
 			@include columns(8);
+			height: 4em;
 		}
 
 		#handle {
@@ -864,6 +879,7 @@ body:not(.video) #wrapper {
 			@include columns-height(6);
 			left: calc-column(6) - $pad / 4; // A little extra padding
 			width: 6em;
+			height: 4em;
 		}
 
 		#avatar {
@@ -901,6 +917,7 @@ body:not(.video) #wrapper {
 		#stmt-3 {
 			@extend .generated-text;
 			margin-bottom: 3 * $pad;
+			height: 4em;
 		}
 
 		#handle {

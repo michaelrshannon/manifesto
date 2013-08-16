@@ -120,6 +120,12 @@
 					// build
 						$(this.container).html(this.html);
 						$('body').attr('class', this.template);
+
+					// apply some simplistic text scaling
+						$('#stmt-1, #stmt-3').each(function (i, el) {
+							var currentFontSize = parseInt($(el).css('font-size'), 10);
+							$(el).textfill({ maxFontPixels: currentFontSize });
+						});
 				},
 			
 				animate:function(onComplete)
