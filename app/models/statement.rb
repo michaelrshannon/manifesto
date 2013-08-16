@@ -258,6 +258,13 @@ class Statement < ActiveRecord::Base
       fragments = nil
       tweets = nil
     end
+    
+    user = nil
+    if tweet1.nil?
+      TwitterUser.find_by_screen_name(screen_name)
+    else
+      user = tweet1.twitter_user
+
     {
         :id => id,
         :date => created_at,
@@ -267,7 +274,7 @@ class Statement < ActiveRecord::Base
         :user =>
             {
                 :screen_name => screen_name,
-                :name => tweet1.twitter_user.name,
+                :name => user.name,
                 :image => picture_url,
             }
     }
