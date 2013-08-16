@@ -4,7 +4,13 @@ class StatementsController < ApplicationController
   def index
     @statements = Statement.all
     respond_to do |format|
-      format.html
+      format.json { render json: @statements }
+    end
+  end
+
+  def last
+    respond_to do |format|
+      format.json { render json: Statement.last }
     end
   end
 
