@@ -1,5 +1,5 @@
 class Statement < ActiveRecord::Base
-  attr_accessible :first_tweet, :fragment1, :fragment2, :fragment3, :fragment4, :picture_url, :screen_name, :second_tweet
+  attr_accessible :first_tweet, :fragment1, :fragment2, :fragment3, :fragment4, :picture_url, :screen_name, :second_tweet, :mention_id
 
   ###-------------------------------------------------------------------------------
   # Initializers
@@ -147,7 +147,7 @@ class Statement < ActiveRecord::Base
   ###-------------------------------------------------------------------------------
   # Public Methods
   ###-------------------------------------------------------------------------------
-  def self.store_statement(user)
+  def self.store_statement(user, mention)
     r = Random.new()
 
     found = false; i = 0
@@ -197,7 +197,8 @@ class Statement < ActiveRecord::Base
           picture_url: user.profile_image_url.gsub('_normal', '_bigger'),
           screen_name: user.screen_name,
           first_tweet: first_tweet[:id],
-          second_tweet: second_tweet[:id]
+          second_tweet: second_tweet[:id],
+          mention_id: mention["id"]
       )
 
     else
@@ -209,7 +210,8 @@ class Statement < ActiveRecord::Base
           picture_url: user.profile_image_url,
           screen_name: user.screen_name,
           first_tweet: nil,
-          second_tweet: nil
+          second_tweet: nil,
+          mention_id: mention["id"]
       )
     end
   end
@@ -279,7 +281,14 @@ class Statement < ActiveRecord::Base
   end
 
   def send_to_user
-    @@client.update("@#{screen_name} Here's your Mashifesto! #{to_url}")
+    options = {}
+    if mention_id
+      # mention_id is an ID in our database. We need to look it up to find
+      # Twitter's ID for the mention.
+      mention = Mention.find(mention_id)
+      options[:in_reply_to_status_id] = mention.mention_id
+    end
+    @@client.update("@#{screen_name} Here's your Mashifesto! #{to_url}", options)
   end
 end
 

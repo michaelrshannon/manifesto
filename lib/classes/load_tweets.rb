@@ -5,10 +5,11 @@ class LoadTweets
 
   @queue = :tweets
 
-  def self.perform(screen_name)
-    Tweet.update_tweets(screen_name)
-    user = TwitterUser.find_by_screen_name(screen_name)
-    statement = Statement.store_statement(user)
+  def self.perform(mention)
+    # mention may have been passed as a model, but it comes through as a hash.
+    Tweet.update_tweets(mention["screen_name"])
+    user = TwitterUser.find_by_screen_name(mention["screen_name"])
+    statement = Statement.store_statement(user, mention)
 
     # Allow tweets from staging for now as there is no "production"
     if Rails.env.production? || Rails.env.staging?

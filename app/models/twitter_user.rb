@@ -42,9 +42,8 @@ class TwitterUser < ActiveRecord::Base
       begin
         @@client.mentions_timeline.each do |mention|
           unless Mention.find_by_mention_id(mention.id)
-            Mention.build_from_api(mention)
-            screen_name = mention.user.screen_name
-            Resque.enqueue(LoadTweets, screen_name)
+            our_mention = Mention.build_from_api(mention)
+            Resque.enqueue(LoadTweets, our_mention)
           end
         end
       rescue Twitter::Error::TooManyRequests

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130728121829) do
+ActiveRecord::Schema.define(:version => 20130816061302) do
 
   create_table "mentions", :force => true do |t|
     t.string   "screen_name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130728121829) do
     t.datetime "updated_at",      :null => false
     t.integer  "first_tweet"
     t.integer  "second_tweet"
+    t.integer  "mention_id"
   end
 
   create_table "tweets", :force => true do |t|
