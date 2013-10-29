@@ -221,4 +221,18 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="<%= @statement.to_url %>" />
   <% end %>
+<% else %>
+  <% content_for :head do %>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mashifesto">
+    <meta name="twitter:creator" content="@mashifesto">
+    <meta name="twitter:title" content="@mashifesto">
+    <meta name="twitter:description" content="An art project that generates a personal manifesto from your twitter feed. Tweet hello to @mashifesto to generate your very own statement of intent.">
+
+    <meta property="og:title" content="@mashifesto" />
+    <meta property="og:description" content="An art project that generates a personal manifesto from your twitter feed. Tweet hello to @mashifesto to generate your very own statement of intent." />
+    <meta property="og:image" content="http://www.mashifesto.org/assets/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= root_url %>" />
+  <% end %>
 <% end %>
