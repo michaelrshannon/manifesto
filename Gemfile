@@ -28,3 +28,7 @@ group :development do
   gem 'meta_request'
   gem 'heroku_san'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
