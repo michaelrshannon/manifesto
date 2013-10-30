@@ -48,6 +48,7 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    eventmachine (1.0.3-x86-mingw32)
     excon (0.22.1)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -83,6 +84,7 @@ GEM
     newrelic_rpm (3.6.0.78)
     obscenity (1.0.2)
     pg (0.15.1)
+    pg (0.15.1-x86-mingw32)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -164,6 +166,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   better_errors
